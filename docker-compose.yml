@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  backend:
+    image: node:latest
+    container_name: backend-app
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./backend:/home/node/app
+    ports:
+      - "3000:3000"
+    command: "npm start"
+
+  database:
+    image: mysql:latest
+    container_name: database-app
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./database:/var/lib/mysql

@@ -1,0 +1,2 @@
+# Ignorar la carpeta node_modules generada por npm/yarn
+node_modules/
