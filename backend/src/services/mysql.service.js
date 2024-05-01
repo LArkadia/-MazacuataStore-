@@ -8,13 +8,15 @@ const credentials = {
 };
 
 const doQuery = async (query) => {
-  const conection = mysql.createConnection(credentials);
-  conection.connect();
-  conection.query(query, function (error, results, fields) {
-    if (error) throw error;
-    console.log("The solution is: ", results[0].solution);
+  return new Promise((resolve, reject) =>{
+    const connection = mysql.createConnection(credentials);
+    connection.connect();
+    connection.query(query, function (error, results, fields) {
+      if (error) reject(error);
+      resolve.apply(results)
+    });
+    connection.end();
   });
-  conection.end();
 };
 
 module.exports = {
