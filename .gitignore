@@ -1,2 +1,13 @@
 # Ignorar la carpeta node_modules generada por npm/yarn
 node_modules/
+# Ignorar archivos generados por MySQL
+database/*.sock
+database/*.pid
+
+# Otros archivos generados por MySQL
+database/*.frm
+database/*.ibd
+database/*.isl
+database/*.opt
+database/*.par
+database/*.qp
