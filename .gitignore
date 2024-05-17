@@ -11,3 +11,4 @@ database/*.isl
 database/*.opt
 database/*.par
 database/*.qp
+venv
