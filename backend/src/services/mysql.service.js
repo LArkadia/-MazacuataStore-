@@ -3,7 +3,7 @@ const mysql = require("mysql");
 const credentials = {
   host: process.env.HOST_MYSQL || "localhost",
   user: process.env.USER_MYSQL || "root",
-  password: process.env.PASS_MYSQL || "",
+  password: process.env.PASS_MYSQL || "JayAndY;ePar1s",
   database: process.env.DB_MYSQL || "mazacuatastore",
 };
 
