@@ -1,13 +1,10 @@
-const bookService   =   require("../services/book.service");
+/*const bookService   =   require("../services/book.service");*/
+const db =  require('../db/mysql')
 
-const getAllBooks   =   async(req, res)=>{
-    try {
-        const books =   await bookService.getAllBooks();
-        res.json(books);
-    } catch (error) {
-        res.status(500).json({error: error.message})
-    }
-};
+const TABLE =   'libro';
+function getAllBooks() {
+    return db.all(TABLE);
+}
 
 module.exports  =   {
     getAllBooks,
