@@ -1,10 +1,10 @@
 const mysql = require("mysql");
-
+let dbname="mazacuatastore",password="mrtetas"
 const credentials = {
   host: process.env.HOST_MYSQL || "localhost",
   user: process.env.USER_MYSQL || "root",
-  password: process.env.PASS_MYSQL || "JayAndY;ePar1s",
-  database: process.env.DB_MYSQL || "mazacuatastore",
+  password: process.env.PASS_MYSQL || password,
+  database: process.env.DB_MYSQL || dbname,
 };
 
 const doQuery = async (query) => {

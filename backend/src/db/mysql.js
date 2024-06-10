@@ -11,8 +11,9 @@ const dbconfig  =   {
 
 let connection;
 function connectionMysql() {
+    console.log(dbconfig);
     connection  =   mysql.createConnection(dbconfig);
-
+    console.log(connection);
     connection.connect((err)=>{
         if (err) {
             console.log('[db.err]', err);
