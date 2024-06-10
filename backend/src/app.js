@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const config = require("./config");
 
 const books = require("./routes/book.routes");
+const users = require("./routes/user.routes");
 //const { error } = require("./network/answers");
 
 const error = require('./network/error')
@@ -16,5 +17,6 @@ app.use(express.urlencoded({ extended: true }));
 app.set("port", config.app.port);
 //rutas
 app.use("/api/books", books);
+app.use("/api/users", users);
 app.use(error);
 module.exports = app;

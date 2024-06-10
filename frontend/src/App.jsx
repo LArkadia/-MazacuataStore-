@@ -7,7 +7,11 @@ import BookPage from "./pages/BookPage";
 import ProfilePage from './pages/ProfilePage';
 import ShopCartPage from "./pages/ShopCartPage";
 import TicketPage from "./pages/TicketPage";
+<<<<<<< HEAD
 import { MianContent } from './components/MianContent';
+=======
+import NotFound from './pages/NotFound';
+>>>>>>> eac2d81cd28a8e7409a1651a6c128c727b53cd92
 
 const routes=createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +24,12 @@ const routes=createBrowserRouter(
       <Route path='/profile' element={<ProfilePage/>}/>
       <Route path='/cart' element={<ShopCartPage/>}/>
       <Route path='/ticket' element={<TicketPage/>}/>
+<<<<<<< HEAD
     </Route>
+=======
+      <Route path="*" element={<NotFound/>}/>
+    </Routes>
+>>>>>>> eac2d81cd28a8e7409a1651a6c128c727b53cd92
   )
 );
 function App() {

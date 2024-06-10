@@ -24,13 +24,7 @@ async function one(req, res) {
 }
 
 async function deleteBook(req, res, next) {
-  //console.log('REQUEST BODY: ', req.body);
   try {
-    /* const { isbn } = req.body;
-        if (!isbn) {
-            return answer.error(req, res, 'ISBN is required', 400);
-        }
-        */
     const items = await bookController.deleteBook(req.body);
     answer.success(req, res, "Book Deleted!", 200);
   } catch (err) {
