@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const config = require('../config');
 const { resolve } = require('styled-jsx/css');
+const { error } = require('../network/answers');
 const dbconfig  =   {
     host: config.mysql.host,
     user: config.mysql.user,
@@ -36,24 +37,90 @@ connectionMysql();
 function all(table) {
     return new Promise((resolve, reject)=>{
         connection.query(`SELECT * FROM ${table}`, (error, result)=>{
-            if(error) return reject(error);
-            resolve(result);
+            return error ? reject(error)    :   resolve(result);
         })
     });
 }
 function one(table, id) {
-    
+    return new Promise((resolve, reject)=>{
+        connection.query(`SELECT * FROM ${table} WHERE isbn=${id}`, (error, result)=>{
+            return error ? reject(error)    :   resolve(result);
+        })
+    });
 }
-function add(table, data) {
-    
+function addBook(table, data) {
+
+    /*if(data){
+        return insert(table, data);
+    }else if(data && data.titulo){
+        return update(table, data);
+    }*/
+
+    if (data) {
+        return upsert(table, data);
+    }
 }
-function deleted(table, id) {
-    
+
+function upsert(table, data) {
+    return new Promise((resolve, reject)=>{
+        const query = `INSERT INTO ${table} SET ? ON DUPLICATE KEY UPDATE ?`
+        console.log('executing query', query, 'with data:', data)
+        connection.query(query, [data, data], (error, result)=>{
+            if (error) {
+                console.log('Error executing query: ', error);
+                return reject(error);
+            }
+            console.log('Query executed succesfully', result);
+            resolve(result);
+        })
+    })
+}
+/*function update(table, data) {
+    return  new Promise((resolve, reject)=>{
+      const query =   `UPDATE ${table} SET ? WHERE isbn = ?`;
+      console.log('executing query', query, 'with data: ')
+      connection.query(query, [data, data.isbn], (error, result) =>{
+          if (error) {
+              console.error('Error executing query:', error);
+              return reject(error);
+          }
+          console.log('Query executed successfully:', result); 
+          resolve(result);
+      });
+    });
+  }
+  function insert(table, data) {
+    return  new Promise((resolve, reject)=>{
+      const query =   `INSERT INTO ${table} SET ?`;
+      console.log('executing query', query, 'with data: ')
+      connection.query(query, data, (error, result) =>{
+          if (error) {
+              console.error('Error executing query:', error);
+              return reject(error);
+          }
+          console.log('Query executed successfully:', result); 
+          resolve(result);
+      });
+    });
+  } */
+function deleteBook(table, data) {
+  return  new Promise((resolve, reject)=>{
+    const query =   `DELETE FROM ${table} WHERE isbn = ?`;
+    console.log('executing query', query, 'with data: ')
+    connection.query(query, [data.isbn], (error, result) =>{
+        if (error) {
+            console.error('Error executing query:', error);
+            return reject(error);
+        }
+        console.log('Query executed successfully:', result); 
+        resolve(result);
+    });
+  });
 }
 
 module.exports  =   {
     all,
     one,
-    add,
-    deleted
+    addBook,
+    deleteBook
 }
