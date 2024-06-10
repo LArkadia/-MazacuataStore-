@@ -2,11 +2,10 @@ import React from 'react';
 
 function BookPage() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 content">
       {/* Barra de navegación */}
       <nav className="bg-white shadow-md">
         <div className="container mx-auto px-4 py-2 flex justify-between items-center">
-          <h1 className="text-2xl font-semibold text-gray-800">Tu Librería</h1>
           <div>
             {/* Aquí puedes agregar elementos de navegación como enlaces a otras secciones */}
           </div>
@@ -42,10 +41,6 @@ function BookPage() {
         </section>
       </main>
 
-      {/* Pie de página */}
-      <footer className="bg-gray-800 text-white py-4 text-center">
-        <p>&copy; 2024 Tu Librería. Todos los derechos reservados.</p>
-      </footer>
     </div>
   );
 }
