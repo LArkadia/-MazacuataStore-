@@ -12,7 +12,6 @@ function one(isbn) {
 }
 
 async function deleteBook(body) {
-    console.log(body)
     try {
         return db.deleteBook(TABLE, body);
     } catch (err) {
