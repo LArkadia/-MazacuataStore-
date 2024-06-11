@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import logo from '../../assets/IMG/logo.jpg'
+import logo from '../../assets/IMG/logoMSBook.png'
 
 export const Header = (isActive=false) => {
     const linkClass = ({ isActive }) =>
