@@ -11,7 +11,7 @@ function RegisterPage() {
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    const res = await axios.post('http://localhost:4000/api/users', data, {
+    const res = await  axios.post('http://localhost:4000/api/users', data, {
       withCredentials: true
     })
     console.log(res)
