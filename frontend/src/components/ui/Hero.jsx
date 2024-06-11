@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import carruselBienvenida from '../../assets/IMG/carrusel1.png';
 import carrusel31min from '../../assets/IMG/carrusel2.png';
-import carruselPenguin from '../../assets/IMG/carrusel3.png'; // Asegúrate de tener esta imagen
+import carruselPenguin from '../../assets/IMG/carrusel3.png'; 
 
 export const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
