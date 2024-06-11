@@ -1,9 +1,16 @@
 const express = require("express");
+const cors=require("cors");
 const router = express.Router();
 const answer = require("../network/answers");
 const bookController = require("../controllers/book.controller");
 
-router.get("/", allBooks);
+var corsOptions = {
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}
+router.get("/", cors(corsOptions),allBooks);
 router.get("/:isbn", one);
 router.put("/", deleteBook);
 router.post("/", addBook);
@@ -34,6 +41,7 @@ async function deleteBook(req, res, next) {
 
 async function addBook(req, res, next) {
   try {
+    console.log(req.body)
     const items = await bookController.addBook(req.body);
     if (req.body.id == 0) {
       message = 'Book saved'

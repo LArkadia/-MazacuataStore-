@@ -1,7 +1,14 @@
-function homePage() {
+import { Hero } from "../components/ui/Hero"
+import BookPage from "./BookPage"
+
+function HomePage() {
   return (
-    <div>homePage</div>
+  <>
+   <Hero/>
+
+   <BookPage/>
+  </>
   )
 }
 
-export default homePage
+export default HomePage
