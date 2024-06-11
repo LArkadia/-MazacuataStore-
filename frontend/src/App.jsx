@@ -7,7 +7,6 @@ import BookPage from "./pages/BookPage";
 import ProfilePage from './pages/ProfilePage';
 import ShopCartPage from "./pages/ShopCartPage";
 import TicketPage from "./pages/TicketPage";
-
 import { MianContent } from './components/MianContent';
 import NotFound from './pages/NotFound';
 
@@ -23,6 +22,7 @@ const routes=createBrowserRouter(
       <Route path='/profile' element={<ProfilePage/>}/>
       <Route path='/cart' element={<ShopCartPage/>}/>
       <Route path='/ticket' element={<TicketPage/>}/>
+      <Route path="*" element={<NotFound/>}/>
     </Route>
   )
 );

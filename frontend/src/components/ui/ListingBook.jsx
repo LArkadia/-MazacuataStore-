@@ -1,8 +1,8 @@
 import React from 'react'
 
-export const ListingBook = (content,isHome=false) => {
+export const ListingBook = (content,index=1,isHome=false) => {
     console.log(content);
-    content=content.data;
+    let data=content.data;
   return (
     <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="aspect-w-1 aspect-h-1">

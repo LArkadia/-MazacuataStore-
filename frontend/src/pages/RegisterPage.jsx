@@ -1,5 +1,7 @@
-import { Button, Card, Input } from "../components/ui";
+import { Button, Card, Input, Label } from "../components/ui";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import  axios  from "axios";
 
 function RegisterPage() {
 
@@ -9,39 +11,54 @@ function RegisterPage() {
     formState: {errors}
   } = useForm();
 
-  const onSubmit = handleSubmit(data => {
-    console.log(data)
-  })
+  const onSubmit = handleSubmit(async (data) => {
+    const res = await  axios.post('http://localhost:4000/api/users', data, {
+      withCredentials: true
+    })
+    console.log(res)
+  });
 
   return (
     <div className='h-[calc(100vh-64px)] flex items-center justify-center'>
       <Card>
         <h3 className="text-2xl font-bold">Crea tu cuenta</h3>
         <form onSubmit={onSubmit}>
+          <Label htmlFor="nombre">
+            Nombre
+          </Label>
           <Input 
             placeholder="Ingresa tu nombre"
-            {...register('name', {
+            {...register('nombre', {
               required: true})}
           />
           {
-            errors.name && <p className="text-red-500">Escribe tu nombre</p>
+            errors.nombre && <p className="text-red-500">Escribe tu nombre</p>
           }
+          <Label htmlFor="apellidos">
+            Apellidos
+          </Label>
           <Input 
-            placeholder="Ingresa tu apellido"
-            {...register('lastname', {
+            placeholder="Ingresa tus apellidos"
+            {...register('apellidos', {
               required: true})}
           />
           {
-            errors.lastname && <p className="text-red-500">Escribe tu apellido</p>
+            errors.apellidos && <p className="text-red-500">Escribe tu apellido</p>
           }
+          <Label htmlFor="direccion">
+            Dirección
+          </Label>
           <Input 
             placeholder="Ingresa tu dirección"
-            {...register('address', {
+            {...register('direccion', {
               required: true})}
           />
           {
             errors.address && <p className="text-red-500">Escribe tu dirección</p>
           }
+          <Label htmlFor="email">
+            E-mail
+          </Label>
           <Input
             type="email" 
             placeholder="Ingresa tu e-mail"
@@ -52,6 +69,9 @@ function RegisterPage() {
           {
             errors.email && <p className="text-red-500">Escribe tu e-mail</p>
           }
+          <Label htmlFor="password">
+            Contraseña
+          </Label>
           <Input 
             type="password"
             placeholder="Ingresa tu contraseña"
@@ -64,6 +84,12 @@ function RegisterPage() {
           <Button>
             Registrate
           </Button>
+          <div className="flex justify-between my-4">
+            <p>¿Ya tienes una cuenta?</p>
+            <Link to="/login" className="font-bold">
+              Inicia sesión aquí
+            </Link>
+          </div>
         </form>
       </Card>
     </div>
