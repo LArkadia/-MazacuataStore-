@@ -36,4 +36,4 @@ export const Header = (isActive=false) => {
           </div>
         </nav>
       );
-}
+};
