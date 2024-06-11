@@ -8,7 +8,7 @@ var corsOptions = {
   "origin": "*",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": false,
-  "optionsSuccessStatus": 204
+  "optionsSuccessStatus": 200
 }
 router.get("/", cors(corsOptions),allBooks);
 router.get("/:isbn", one);
