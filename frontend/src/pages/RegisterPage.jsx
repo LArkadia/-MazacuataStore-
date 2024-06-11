@@ -1,5 +1,6 @@
 import { Button, Card, Input } from "../components/ui";
 import { useForm } from "react-hook-form";
+import  axios  from "axios";
 
 function RegisterPage() {
 
@@ -9,9 +10,12 @@ function RegisterPage() {
     formState: {errors}
   } = useForm();
 
-  const onSubmit = handleSubmit(data => {
-    console.log(data)
-  })
+  const onSubmit = handleSubmit(async (data) => {
+    const res = await axios.post('http://localhost:4000/api/users', data, {
+      withCredentials: true
+    })
+    console.log(res)
+  });
 
   return (
     <div className='h-[calc(100vh-64px)] flex items-center justify-center'>
@@ -20,23 +24,23 @@ function RegisterPage() {
         <form onSubmit={onSubmit}>
           <Input 
             placeholder="Ingresa tu nombre"
-            {...register('name', {
+            {...register('nombre', {
               required: true})}
           />
           {
-            errors.name && <p className="text-red-500">Escribe tu nombre</p>
+            errors.nombre && <p className="text-red-500">Escribe tu nombre</p>
           }
           <Input 
-            placeholder="Ingresa tu apellido"
-            {...register('lastname', {
+            placeholder="Ingresa tus apellidos"
+            {...register('apellidos', {
               required: true})}
           />
           {
-            errors.lastname && <p className="text-red-500">Escribe tu apellido</p>
+            errors.apellidos && <p className="text-red-500">Escribe tu apellido</p>
           }
           <Input 
             placeholder="Ingresa tu dirección"
-            {...register('address', {
+            {...register('direccion', {
               required: true})}
           />
           {
