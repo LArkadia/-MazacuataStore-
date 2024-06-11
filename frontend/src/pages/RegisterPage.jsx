@@ -1,5 +1,6 @@
-import { Button, Card, Input } from "../components/ui";
+import { Button, Card, Input, Label } from "../components/ui";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import  axios  from "axios";
 
 function RegisterPage() {
@@ -22,6 +23,9 @@ function RegisterPage() {
       <Card>
         <h3 className="text-2xl font-bold">Crea tu cuenta</h3>
         <form onSubmit={onSubmit}>
+          <Label htmlFor="nombre">
+            Nombre
+          </Label>
           <Input 
             placeholder="Ingresa tu nombre"
             {...register('nombre', {
@@ -30,6 +34,9 @@ function RegisterPage() {
           {
             errors.nombre && <p className="text-red-500">Escribe tu nombre</p>
           }
+          <Label htmlFor="apellidos">
+            Apellidos
+          </Label>
           <Input 
             placeholder="Ingresa tus apellidos"
             {...register('apellidos', {
@@ -38,6 +45,9 @@ function RegisterPage() {
           {
             errors.apellidos && <p className="text-red-500">Escribe tu apellido</p>
           }
+          <Label htmlFor="direccion">
+            Dirección
+          </Label>
           <Input 
             placeholder="Ingresa tu dirección"
             {...register('direccion', {
@@ -46,6 +56,9 @@ function RegisterPage() {
           {
             errors.address && <p className="text-red-500">Escribe tu dirección</p>
           }
+          <Label htmlFor="email">
+            E-mail
+          </Label>
           <Input
             type="email" 
             placeholder="Ingresa tu e-mail"
@@ -56,6 +69,9 @@ function RegisterPage() {
           {
             errors.email && <p className="text-red-500">Escribe tu e-mail</p>
           }
+          <Label htmlFor="password">
+            Contraseña
+          </Label>
           <Input 
             type="password"
             placeholder="Ingresa tu contraseña"
@@ -68,6 +84,12 @@ function RegisterPage() {
           <Button>
             Registrate
           </Button>
+          <div className="flex justify-between my-4">
+            <p>¿Ya tienes una cuenta?</p>
+            <Link to="/login" className="font-bold">
+              Inicia sesión aquí
+            </Link>
+          </div>
         </form>
       </Card>
     </div>
