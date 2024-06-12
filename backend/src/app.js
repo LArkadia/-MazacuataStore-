@@ -5,8 +5,9 @@ const cors = require('cors');
 
 const books = require("./routes/book.routes");
 const users = require("./routes/user.routes");
-//const { error } = require("./network/answers");
+const clients = require("./routes/client.routes");
 
+//Errors
 const error = require('./network/error')
 
 const app = express();
@@ -24,5 +25,6 @@ app.set("port", config.app.port);
 //rutas
 app.use("/api/books", books);
 app.use("/api/users", users);
+app.use("/api/clients", clients)
 app.use(error);
 module.exports = app;

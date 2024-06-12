@@ -137,6 +137,58 @@ function deleteUser(table, data) {
     });
   });
 }
+
+/* CLIENTS */
+function allClients(table) {
+    return new Promise((resolve, reject)=>{
+        connection.query(`SELECT * FROM ${table}`, (error, result)=>{
+            return error ? reject(error)    :   resolve(result);
+        })
+    });
+}
+function oneClient(table, id) {
+    return new Promise((resolve, reject)=>{
+        connection.query(`SELECT * FROM ${table} WHERE id=${id}`, (error, result)=>{
+            return error ? reject(error)    :   resolve(result);
+        })
+    });
+}
+function addClient(table, data) {
+
+    if (data) {
+        return upsert(table, data);
+    }
+}
+
+function upsertClient(table, data) {
+    return new Promise((resolve, reject)=>{
+        const query = `INSERT INTO ${table} SET ? ON DUPLICATE KEY UPDATE ?`
+        console.log('executing query', query, 'with data: ', data)
+        connection.query(query, [data, data], (error, result)=>{
+            if (error) {
+                console.log('Error executing query: ', error);
+                return reject(error);
+            }
+            console.log('Query executed succesfully', result);
+            resolve(result);
+        })
+    })
+}
+
+function deleteClient(table, data) {
+  return  new Promise((resolve, reject)=>{
+    const query =   `DELETE FROM ${table} WHERE id = ?`;
+    console.log('executing query', query, 'with data: ', data)
+    connection.query(query, [data], (error, result) =>{
+        if (error) {
+            console.error('Error executing query:', error);
+            return reject(error);
+        }
+        console.log('Query executed successfully:', result); 
+        resolve(result);
+    });
+  });
+}
 module.exports  =   {
     all,
     one,
@@ -146,5 +198,9 @@ module.exports  =   {
     oneUser,
     addUser,
     upsertUser,
-    deleteUser
+    deleteUser,
+    allClients,
+    oneClient,
+    deleteClient,
+    addClient
 }
