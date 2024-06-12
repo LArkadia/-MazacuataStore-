@@ -8,7 +8,6 @@ export const BlockBooks = ({isHome=false}) => {
     useEffect(() => {
       const getBooks = async () => {
         const url=isHome==true?"http://localhost:4000/api/books/top":"http://localhost:4000/api/books";
-        console.log(isHome);
         try{
           const res=await fetch(url);
           const json=await res.json();
