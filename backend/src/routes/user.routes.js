@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const answer = require("../network/answers");
-const userController = require("../controllers/user.controller");
+const userController = require("../modules/user/index");
 
 router.get("/", allUsers);
 router.get("/:id", oneUser);
