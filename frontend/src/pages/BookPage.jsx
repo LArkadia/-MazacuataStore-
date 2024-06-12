@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { BlockBooks } from './BlockBooks';
+import { BlockBooks } from '../components/ui/BlockBooks';
 
 
 
-function BookPage() {
+function BookPage({isHome=false}) {
   return (
-    <BlockBooks/>
+    <>
+      <BlockBooks isHome={isHome?true:false}/>
+    </>
   );
 }
 

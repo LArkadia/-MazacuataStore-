@@ -5,7 +5,7 @@ function HomePage() {
   return (
   <>
    <Hero/>
-   <BookPage/>
+   <BookPage isHome={true}/>
   </>
   )
 }

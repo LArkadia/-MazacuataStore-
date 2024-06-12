@@ -11,7 +11,8 @@ var corsOptions = {
   "optionsSuccessStatus": 200
 }
 router.get("/", cors(corsOptions),allBooks);
-router.get("/:isbn", one);
+router.get("/single/:isbn", one);
+router.get("/top",cors(corsOptions),top)
 router.put("/", deleteBook);
 router.post("/", addBook);
 
@@ -26,6 +27,16 @@ async function one(req, res) {
     const items = await bookController.one(req.params.isbn);
     answer.success(req, res, items, 200);
   } catch (err) {
+    answer.error(req, res, err, 500);
+  }
+}
+async function top(req,res){
+  try{
+    console.log("top")
+    const items = await bookController.selectTop("precio");
+    answer.success(req, res, items, 200);
+  }
+  catch(err){
     answer.error(req, res, err, 500);
   }
 }

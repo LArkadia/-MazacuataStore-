@@ -44,7 +44,14 @@ function all(table) {
 }
 function one(table, id) {
     return new Promise((resolve, reject)=>{
-        connection.query(`SELECT * FROM ${table} WHERE isbn=${id}`, (error, result)=>{
+        connection.query(`SELECT * FROM ${table} WHERE isbn='${id}'`, (error, result)=>{
+            return error ? reject(error)    :   resolve(result);
+        })
+    });
+}
+function top(table,orderBy){
+    return new Promise((resolve, reject)=>{
+        connection.query(`SELECT * FROM ${table} ORDER BY ${orderBy} DESC LIMIT 4`, (error, result)=>{
             return error ? reject(error)    :   resolve(result);
         })
     });
@@ -192,6 +199,7 @@ function deleteClient(table, data) {
 module.exports  =   {
     all,
     one,
+    top,
     addBook,
     deleteBook,
     allUsers,
