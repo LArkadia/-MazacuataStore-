@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export const ListingBook = (content,index=1,isHome=false) => {
     console.log(content);
@@ -7,15 +8,17 @@ export const ListingBook = (content,index=1,isHome=false) => {
     <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="aspect-w-1 aspect-h-1">
                   {/* Aquí irá la imagen del libro */}
-                  <img 
-                    src={data.portada} // Direccion o ubicación de portada
-                    alt={data.titulo}
-                    className="w-full h-full object-cover"
-                  />
+                  <Link to={`http://localhost:5173/libro?isbn=${data.isbn}`}>
+                    <img 
+                      src={data.portada} // Direccion o ubicación de portada
+                      alt={data.titulo}
+                      className="w-full h-full object-cover"
+                    />
+                  </Link>
                 </div>
                 <div className="p-4">
                   <h3 className="text-lg font-medium">{data.titulo}</h3>
-                  <p className="text-gray-600 mt-1">{data.precio}</p>
+                  <p className="text-gray-600 "><i class="fa-solid fa-money-bill"></i> ${data.precio}</p>
                 </div>
     </div>
   )

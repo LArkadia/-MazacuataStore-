@@ -10,7 +10,9 @@ function getAllBooks() {
 function one(isbn) {
     return db.one(TABLE, isbn);
 }
-
+function selectTop(orderBy){
+    return db.top(TABLE,orderBy);
+}
 async function deleteBook(body) {
     try {
         return db.deleteBook(TABLE, body);
@@ -25,6 +27,7 @@ function addBook(body) {
 module.exports  =   {
     getAllBooks,
     one,
+    selectTop,
     deleteBook,
     addBook
 };

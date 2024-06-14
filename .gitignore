@@ -12,3 +12,5 @@ database/*.opt
 database/*.par
 database/*.qp
 venv
+#Doc for configuration DB
+.env
