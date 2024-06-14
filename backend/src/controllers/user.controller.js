@@ -1,5 +1,5 @@
 const TABLE = 'usuario';
-
+const auth = require( '../modules/auth');
 module.exports =  function(dbInjected){
 
     let db = dbInjected;
@@ -19,9 +19,33 @@ module.exports =  function(dbInjected){
             console.error('error in deleteUser controller', err);
         }
     }
-    function addUser(body) {
+    async function addUser(body) {
         try {
-            return db.addUser(TABLE, body)
+            const user = {
+                id: body.id,
+                nombre: body.nombre,
+                apellidos: body.apellidos,
+                tipo_usuario: body.tipo_usuario,
+                direccion: body.direccion,
+                rfc: body.rfc
+            }
+
+            const answer = await db.addUser(TABLE, user)
+            var insertId = 0;
+            if (body.id == 0) {
+                insertId = answer.insertId;
+            } else {
+                insertId = body.id
+            }
+            
+            if (body.email || body.password) {
+               await auth.add({
+                    id: insertId,
+                    email: body.email,
+                    password: body.password
+                })
+            }
+            return true;
         } catch (err) {
             console.error('error in addUser controller', err);
         }
