@@ -62,6 +62,12 @@ function addBook(table, data) {
         return upsert(table, data);
     }
 }
+function add(table, data) {
+
+    if (data) {
+        return upsert(table, data);
+    }
+}
 
 function upsert(table, data) {
     return new Promise((resolve, reject)=>{
@@ -111,7 +117,7 @@ function oneUser(table, id) {
 function addUser(table, data) {
 
     if (data) {
-        return upsert(table, data);
+        return upsertUser(table, data);
     }
 }
 
@@ -126,8 +132,8 @@ function upsertUser(table, data) {
             }
             console.log('Query executed succesfully', result);
             resolve(result);
-        })
-    })
+        });
+    });
 }
 
 function deleteUser(table, data) {
@@ -163,7 +169,7 @@ function oneClient(table, id) {
 function addClient(table, data) {
 
     if (data) {
-        return upsert(table, data);
+        return upsertClient(table, data);
     }
 }
 
@@ -196,11 +202,22 @@ function deleteClient(table, data) {
     });
   });
 }
+
+/* LOGIN */
+function query(table, consulta) {
+    return new Promise((resolve, reject) =>{
+        const query = `SELECT * FROM ${table} WHERE ?`
+        connection.query(query, consulta, (error, result)=>{
+            return error ? reject(error) : resolve(result[0]);
+        })
+    });
+}
 module.exports  =   {
     all,
     one,
     top,
     addBook,
+    add,
     deleteBook,
     allUsers,
     oneUser,
@@ -210,5 +227,6 @@ module.exports  =   {
     allClients,
     oneClient,
     deleteClient,
-    addClient
+    addClient,
+    query
 }

@@ -5,12 +5,11 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 function LoginPage() {
-
   const { register, handleSubmit } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
     console.log(data)
-    const res = await axios.post('http://localhost:4000/api/users', data)
+    const res = await axios.get('http://localhost:4000/api/users', data)
     console.log(res)
   });
 
