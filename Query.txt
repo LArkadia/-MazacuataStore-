@@ -38,6 +38,7 @@ CREATE TABLE `auth` (
 
 LOCK TABLES `auth` WRITE;
 /*!40000 ALTER TABLE `auth` DISABLE KEYS */;
+INSERT INTO `auth` VALUES (70,'ilovepaper@example.com','admin'),(71,'ilovepaper2@example.com','$2b$05$DtV7lU3e6ziypxx1.Lf1n.H4A9YiyI1WDQyLazvCMSo7UNQNUAg9W'),(72,'ilovepaper3@example.com','$2b$05$/igoF6vM9zJ5LwvEWvPyjOnD8RVwUddZsvNqiNPRzBFCM/QFuVI4e'),(73,'ilovepaper4@example.com','$2b$05$9hVBBIUEf.75kkmABtdqiewWERNluZkehK9/Za62nUXnCTCSZwtda');
 /*!40000 ALTER TABLE `auth` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +61,7 @@ CREATE TABLE `cliente` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +70,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (4,'Juan','Pérez Gómez','juan@example.com','activo','Calle Principal #123','ABCD123456XYZ','2024-06-11 23:39:55','2024-06-11 23:39:55'),(5,'María','García López','maria@example.com','inactivo','Avenida Central #456','EFGH789012ABC','2024-06-11 23:39:55','2024-06-11 23:39:55'),(6,'Carlos','Martínez Rodríguez','carlos@example.com','activo','Plaza Mayor #789','IJKL345678DEF','2024-06-11 23:39:55','2024-06-11 23:39:55');
+INSERT INTO `cliente` VALUES (4,'Juan','Pérez Gómez','juan@example.com','activo','Calle Principal #123','ABCD123456XYZ','2024-06-11 23:39:55','2024-06-11 23:39:55'),(5,'María','García López','maria@example.com','inactivo','Avenida Central #456','EFGH789012ABC','2024-06-11 23:39:55','2024-06-11 23:39:55'),(6,'Carlos','Martínez Rodríguez','carlos@example.com','activo','Plaza Mayor #789','IJKL345678DEF','2024-06-11 23:39:55','2024-06-11 23:39:55'),(8,'Michael','Scott','ilovepaper@example.com','activo','Av Siempre Viva 45','RFC14763355','2024-06-14 03:50:34','2024-06-14 03:50:34');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,14 +181,13 @@ CREATE TABLE `usuario` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
-  `email` varchar(255) NOT NULL,
   `tipo_usuario` enum('admin','vendedor') NOT NULL,
   `direccion` varchar(255) DEFAULT NULL,
   `rfc` varchar(13) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,7 +196,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (7,'Juan','Doe','jondoedunder@example.com','vendedor','Elm Street 3','RFC15663355','2024-06-11 23:49:14','2024-06-11 23:49:14'),(8,'Michael','Scott','ilovepaper@example.com','vendedor','Av Siempre Viva 45','RFC14763355','2024-06-11 23:50:26','2024-06-11 23:50:26'),(11,'Pedro','López','pedro.lopez@example.com','admin','Callejón del Beso 202','RFC3344556677','2024-06-11 01:42:56','2024-06-11 01:42:56'),(12,'Lucía','Rodríguez','lucia.rodriguez@example.com','admin','Plaza de la Constitución 303','RFC4455667788','2024-06-11 01:42:56','2024-06-11 01:42:56'),(69,'Jim','Halpert','jimdunder@example.com','admin','Atlanta, Georgia 2613','RFC1222333355','2024-06-11 22:07:27','2024-06-11 23:44:44');
+INSERT INTO `usuario` VALUES (7,'Juan','Doe','vendedor','Elm Street 3','RFC15663355','2024-06-11 23:49:14','2024-06-11 23:49:14'),(8,'Michael','Scott','vendedor','Av Siempre Viva 45','RFC14763355','2024-06-11 23:50:26','2024-06-11 23:50:26'),(11,'Pedro','López','admin','Callejón del Beso 202','RFC3344556677','2024-06-11 01:42:56','2024-06-11 01:42:56'),(12,'Lucía','Rodríguez','admin','Plaza de la Constitución 303','RFC4455667788','2024-06-11 01:42:56','2024-06-11 01:42:56'),(69,'Jim','Halpert','admin','Atlanta, Georgia 2613','RFC1222333355','2024-06-11 22:07:27','2024-06-11 23:44:44'),(70,'Michael','Scott','admin','Av Siempre Viva 45','RFC14763355','2024-06-14 04:34:24','2024-06-14 04:34:24'),(71,'OutKast','Nimbus','admin','Av Siempre Viva 45','RFC14653355','2024-06-14 04:49:22','2024-06-14 04:49:22'),(72,'Andre','Nimbus','admin','Av Siempre Viva 45','RFC14653355','2024-06-14 04:49:54','2024-06-14 04:49:54'),(73,'Ricky','Martin','admin','Av Siempre Viva 45','RFC14653355','2024-06-14 05:08:45','2024-06-14 05:08:45');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,4 +241,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-11 18:39:27
+-- Dump completed on 2024-06-14  0:47:37
