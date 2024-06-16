@@ -17,7 +17,7 @@ const routes=createBrowserRouter(
       <Route index element={<HomePage/>}/>
       <Route path='/login' element={<LoginPage/>}/>
       <Route path='/register' element={<RegisterPage/>}/>
-      <Route path='/libro' element={<BookFormPage/>}/>
+      <Route path='/books/single' element={<BookFormPage/>}/>
       <Route path='/books' element={<BookPage/>}/>
       <Route path='/profile' element={<ProfilePage/>}/>
       <Route path='/cart' element={<ShopCartPage/>}/>

@@ -28,7 +28,6 @@ export const SingleBook = ({params}) => {
       <div className="min-h-screen bg-gray-100 p-5">
       <main className="container mx-auto">
         <section className="mt-8">
-          
           <div className="flex flex-col md:flex-row gap-8">
             <div className="md:w-1/4 ml-4"> {/* Portada: 1/4 del ancho */}
               <img
@@ -72,7 +71,7 @@ export const SingleBook = ({params}) => {
           </div>
         </section>
       </main>
-    </div>:<NotFoundComponent/>}
+    </div>:<NotFoundComponent msg="Producto no encontrado"/>}
     </>
   )
 }

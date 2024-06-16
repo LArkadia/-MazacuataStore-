@@ -2,12 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { ListeningBooks } from './ListeningBooks';
 import { get, set } from 'react-hook-form';
 import { ListingBook } from './ListingBook';
+import { Navigate, redirect } from 'react-router';
+
 
 export const BlockBooks = ({isHome=false}) => {
+    const [isbnSearch,setisbnSearch]=useState('');
+    const [goSearch,setGoSearch]=useState(false);
     const [books, setBooks] = useState([]);
+    function search() {
+      if(isbnSearch.length>0){
+        setGoSearch(true);
+      }
+    }
     useEffect(() => {
       const getBooks = async () => {
-        const url=isHome==true?"http://localhost:4000/api/books/top":"http://localhost:4000/api/books";
+        const url=isHome?"http://localhost:4000/api/books/top":"http://localhost:4000/api/books";
         try{
           const res=await fetch(url);
           const json=await res.json();
@@ -20,17 +29,17 @@ export const BlockBooks = ({isHome=false}) => {
       getBooks();
     }, []);
     const arr=books;
+    if(goSearch) return (<Navigate to={`single?isbn=${isbnSearch}`}/>)
     return (
       <div className="min-h-screen bg-gray-100 p-5">
         {/* Barra de navegación */}
-  
         {/* Sección principal */}
         <main className="container mx-auto ">
           {/*Menu busqueda*/}
           {isHome?<></>:
-          <div className="input-group">
-            <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-            <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+          <div className="c">
+            <input   name="isbn" onChange={(e)=>{setisbnSearch(e.target.value)}}/>
+            <button type="submit" onClick={search}>Enviar</button>
           </div>
           }
           {/* Sección de libros */}
