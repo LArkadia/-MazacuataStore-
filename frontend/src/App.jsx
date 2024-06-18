@@ -7,6 +7,8 @@ import BookPage from "./pages/BookPage";
 import ProfilePage from './pages/ProfilePage';
 import ShopCartPage from "./pages/ShopCartPage";
 import TicketPage from "./pages/TicketPage";
+import Scanner from "./pages/Scanner";
+import POS from "./pages/PointOfSale";
 import { MianContent } from './components/MianContent';
 import NotFound from './pages/NotFound';
 
@@ -22,6 +24,8 @@ const routes=createBrowserRouter(
       <Route path='/profile' element={<ProfilePage/>}/>
       <Route path='/cart' element={<ShopCartPage/>}/>
       <Route path='/ticket' element={<TicketPage/>}/>
+      <Route path='/scanner' element={<Scanner/>}/>
+      <Route path='/puntodeventa' element={<POS/>}/>
       <Route path="*" element={<NotFound/>}/>
     </Route>
   )
