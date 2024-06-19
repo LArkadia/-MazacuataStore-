@@ -19,7 +19,7 @@ module.exports =  function(dbInjected){
             console.error('error in deleteUser controller', err);
         }
     }
-    async function addUser(body) {
+    async function add(body) {
         try {
             const user = {
                 id: body.id,
@@ -29,8 +29,8 @@ module.exports =  function(dbInjected){
                 direccion: body.direccion,
                 rfc: body.rfc
             }
-
-            const answer = await db.addUser(TABLE, user)
+            console.log(user)
+            const answer = await db.add(TABLE, user)
             var insertId = 0;
             if (body.id == 0) {
                 insertId = answer.insertId;
@@ -54,6 +54,6 @@ module.exports =  function(dbInjected){
         getAllUsers,
         getOneUser,
         deleteUser,
-        addUser
+        add
     }
 };

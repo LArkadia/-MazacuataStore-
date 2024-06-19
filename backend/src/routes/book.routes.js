@@ -3,6 +3,7 @@ const cors=require("cors");
 const router = express.Router();
 const answer = require("../network/answers");
 const bookController = require("../controllers/book.controller");
+const { auth } = require("../middleware/auth");
 
 var corsOptions = {
   "origin": "*",
@@ -10,6 +11,7 @@ var corsOptions = {
   "preflightContinue": false,
   "optionsSuccessStatus": 200
 }
+router.use(auth(['admin']));
 router.get("/", cors(corsOptions),allBooks);
 router.get("/single/:isbn", one);
 router.get("/top",cors(corsOptions),top)

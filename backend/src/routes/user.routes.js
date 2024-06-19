@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const answer = require("../network/answers");
 const userController = require("../modules/user/index");
+const { auth } = require("../middleware/auth");
 
+router.use(auth(['admin']));
 router.get("/", allUsers);
 router.get("/:id", oneUser);
 router.put("/", deleteUser);
@@ -10,6 +12,7 @@ router.post("/", addUser);
 
 async function allUsers(req, res) {
     try {
+        console.log('User: ', req.authorizer);
         const items = await userController.getAllUsers();
         answer.success(req, res, items, 200);
     } catch (err) {
@@ -37,7 +40,7 @@ async function deleteUser(req, res, next) {
 
 async function addUser(req, res, next) {
     try {
-        const items = await userController.addUser(req.body);
+        const items = await userController.add(req.body);
         answer.success(req, res, 'User added!', 201);
     } catch (err) {
         next(err);

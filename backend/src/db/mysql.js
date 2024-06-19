@@ -204,9 +204,9 @@ function deleteClient(table, data) {
 }
 
 /* LOGIN */
-function query(table, consulta) {
+function loginQuery(table, consulta) {
     return new Promise((resolve, reject) =>{
-        const query = `SELECT * FROM ${table} WHERE ?`
+        const query = `SELECT * FROM ${table} AS a INNER JOIN usuario AS u ON a.id = u.id WHERE ?`
         connection.query(query, consulta, (error, result)=>{
             return error ? reject(error) : resolve(result[0]);
         })
@@ -228,5 +228,5 @@ module.exports  =   {
     oneClient,
     deleteClient,
     addClient,
-    query
+    loginQuery
 }
