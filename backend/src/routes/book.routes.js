@@ -11,10 +11,11 @@ var corsOptions = {
   "preflightContinue": false,
   "optionsSuccessStatus": 200
 }
-router.use(auth(['admin']));
+
 router.get("/", cors(corsOptions),allBooks);
 router.get("/single/:isbn", one);
 router.get("/top",cors(corsOptions),top)
+router.use(auth(['admin']));
 router.put("/", deleteBook);
 router.post("/", addBook);
 
