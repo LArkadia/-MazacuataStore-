@@ -13,7 +13,7 @@ var corsOptions = {
 }
 
 router.get("/", cors(corsOptions),allBooks);
-router.get("/single/:isbn", one);
+router.get("/single/:titulo", one);
 router.get("/top",cors(corsOptions),top)
 router.use(auth(['admin']));
 router.put("/", deleteBook);
@@ -27,7 +27,7 @@ async function allBooks(req, res) {
 
 async function one(req, res) {
   try {
-    const items = await bookController.one(req.params.isbn);
+    const items = await bookController.one(req.params.titulo);
     answer.success(req, res, items, 200);
   } catch (err) {
     answer.error(req, res, err, 500);

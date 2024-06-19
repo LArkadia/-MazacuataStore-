@@ -7,8 +7,8 @@ function getAllBooks() {
     return db.all(TABLE);
 }
 
-function one(isbn) {
-    return db.one(TABLE, isbn);
+function one(title) {
+    return db.one(TABLE, title);
 }
 function selectTop(orderBy){
     return db.top(TABLE,orderBy);

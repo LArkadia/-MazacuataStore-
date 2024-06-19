@@ -6,11 +6,11 @@ import { Navigate, redirect } from 'react-router';
 
 
 export const BlockBooks = ({isHome=false}) => {
-    const [isbnSearch,setisbnSearch]=useState('');
+    const [titleSearch,setTitleSearch]=useState('');
     const [goSearch,setGoSearch]=useState(false);
     const [books, setBooks] = useState([]);
     function search() {
-      if(isbnSearch.length>0){
+      if(titleSearch.length>0){
         setGoSearch(true);
       }
     }
@@ -29,7 +29,7 @@ export const BlockBooks = ({isHome=false}) => {
       getBooks();
     }, []);
     const arr=books;
-    if(goSearch) return (<Navigate to={`single?isbn=${isbnSearch}`}/>)
+    if(goSearch) return (<Navigate to={`single?title=${titleSearch}`}/>)
     return (
       <div className="min-h-screen bg-gray-100 p-5">
         {/* Barra de navegación */}
@@ -38,7 +38,7 @@ export const BlockBooks = ({isHome=false}) => {
           {/*Menu busqueda*/}
           {isHome?<></>:
           <div className="c">
-            <input   name="isbn" onChange={(e)=>{setisbnSearch(e.target.value)}}/>
+            <input   name="title" onChange={(e)=>{setTitleSearch(e.target.value)}}/>
             <button type="submit" onClick={search}>Enviar</button>
           </div>
           }

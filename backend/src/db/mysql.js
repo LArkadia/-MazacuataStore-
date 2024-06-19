@@ -42,9 +42,10 @@ function all(table) {
         })
     });
 }
-function one(table, id) {
+function one(table, title) {
     return new Promise((resolve, reject)=>{
-        connection.query(`SELECT * FROM ${table} WHERE isbn='${id}'`, (error, result)=>{
+        const decodedTitle = decodeURIComponent(title);
+        connection.query(`SELECT * FROM ${table} WHERE titulo='${decodedTitle}'`, (error, result)=>{
             return error ? reject(error)    :   resolve(result);
         })
     });
