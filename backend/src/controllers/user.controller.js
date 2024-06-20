@@ -39,7 +39,7 @@ module.exports =  function(dbInjected){
             }
             
             if (body.email || body.password) {
-               await auth.add({
+                await auth.add({
                     id: insertId,
                     email: body.email,
                     password: body.password

@@ -185,8 +185,8 @@ function upsertClient(table, data) {
             }
             console.log('Query executed succesfully', result);
             resolve(result);
-        })
-    })
+        });
+    });
 }
 
 function deleteClient(table, data) {
@@ -207,7 +207,12 @@ function deleteClient(table, data) {
 /* LOGIN */
 function loginQuery(table, consulta) {
     return new Promise((resolve, reject) =>{
-        const query = `SELECT * FROM ${table} AS a INNER JOIN usuario AS u ON a.id = u.id WHERE ?`
+        const query = `
+        SELECT * FROM ${table} AS a
+        LEFT JOIN usuario AS u ON a.id = u.id
+        LEFT JOIN cliente AS c ON a.id = c.id
+        WHERE ?
+    `
         connection.query(query, consulta, (error, result)=>{
             return error ? reject(error) : resolve(result[0]);
         })
