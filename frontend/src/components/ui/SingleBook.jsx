@@ -3,12 +3,14 @@ import { NotFoundComponent } from './NotFoundComponent';
 
 export const SingleBook = ({params}) => {
   const [book, setBook] = useState([]);
-  let hasIsbn=params.has('isbn');
+  let hasTitle = params.has('title');
   useEffect(() => {
       const getBook = async () => {
         
-        const url=hasIsbn?
-        `http://localhost:4000/api/books/single/${params.get('isbn')}`:
+        const title = hasTitle ? params.get('title') : '';
+        const endecodedTitle = encodeURIComponent(title);
+        const url = hasTitle ?
+        `http://localhost:4000/api/books/single/${endecodedTitle}`:
         `http://localhost:4000/api/books/single/1`;
         try{
           const res=await fetch(url);
@@ -21,10 +23,10 @@ export const SingleBook = ({params}) => {
         }
       };
       getBook();
-    }, []);
-    let elem=hasIsbn && Array.isArray(book) && book.length?book[0]:{};
+    }, [params]);
+    let elem=hasTitle && Array.isArray(book) && book.length?book[0]:{};
   return (
-    <> {hasIsbn && Array.isArray(book) && book.length?
+    <> {hasTitle && Array.isArray(book) && book.length?
       <div className="min-h-screen bg-gray-100 p-5">
       <main className="container mx-auto">
         <section className="mt-8">

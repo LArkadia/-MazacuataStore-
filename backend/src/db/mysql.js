@@ -42,9 +42,10 @@ function all(table) {
         })
     });
 }
-function one(table, id) {
+function one(table, title) {
     return new Promise((resolve, reject)=>{
-        connection.query(`SELECT * FROM ${table} WHERE isbn='${id}'`, (error, result)=>{
+        const decodedTitle = decodeURIComponent(title);
+        connection.query(`SELECT * FROM ${table} WHERE titulo='${decodedTitle}'`, (error, result)=>{
             return error ? reject(error)    :   resolve(result);
         })
     });
@@ -184,8 +185,8 @@ function upsertClient(table, data) {
             }
             console.log('Query executed succesfully', result);
             resolve(result);
-        })
-    })
+        });
+    });
 }
 
 function deleteClient(table, data) {
@@ -204,9 +205,14 @@ function deleteClient(table, data) {
 }
 
 /* LOGIN */
-function query(table, consulta) {
+function loginQuery(table, consulta) {
     return new Promise((resolve, reject) =>{
-        const query = `SELECT * FROM ${table} WHERE ?`
+        const query = `
+        SELECT * FROM ${table} AS a
+        LEFT JOIN usuario AS u ON a.id = u.id
+        LEFT JOIN cliente AS c ON a.id = c.id
+        WHERE ?
+    `
         connection.query(query, consulta, (error, result)=>{
             return error ? reject(error) : resolve(result[0]);
         })
@@ -228,5 +234,5 @@ module.exports  =   {
     oneClient,
     deleteClient,
     addClient,
-    query
+    loginQuery
 }

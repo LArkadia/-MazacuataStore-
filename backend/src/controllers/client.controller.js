@@ -1,3 +1,5 @@
+const user = require('../modules/user');
+const auth = require('../modules/auth')
 const TABLE = 'cliente';
 
 module.exports =  function(dbInjected){
@@ -19,9 +21,33 @@ module.exports =  function(dbInjected){
             console.error('error in deleteClient controller', err);
         }
     }
-    function addClient(body) {
+    async function addClient(body) {
         try {
-            return db.addUser(TABLE, body)
+            const client = {
+                id: body.id,
+                nombre: body.nombre,
+                apellidos: body.apellidos,
+                tipo_usuario: body.tipo_usuario,
+                direccion: body.direccion,
+                rfc: body.rfc
+            }
+            console.log(client);
+            const answer =  await db.addClient(TABLE, client);
+            var insertId = 0;
+            if (body.id == 0) {
+                insertId    =   answer.insertId;
+            }else{
+                insertId    =   body.id
+            }
+            if (body.email || body.password) {
+                await auth.add({
+                    id: insertId,
+                    email: body.email,
+                    password: body.password
+                });
+            }
+
+            return true;
         } catch (err) {
             console.error('error in addClient controller', err);
         }

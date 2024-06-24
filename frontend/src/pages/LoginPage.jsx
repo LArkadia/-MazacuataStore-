@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card, Input, Button, Label } from "../components/ui";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -8,13 +7,22 @@ function LoginPage() {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data)
-    const res = await axios.get('http://localhost:4000/api/users', data)
-    console.log(res)
+    console.log(data);
+    try {
+      const res = await axios.post('http://localhost:4000/api/auth/login', data);
+      console.log(res.data);
+      if (res.data.body) {
+        console.log('Token:', res.data.body);
+      } else {
+        console.log('No se recibió un token en la respuesta.');
+      }
+    } catch (error) {
+      console.error('Error al realizar la solicitud:', error);
+    }
   });
 
   return (
-    <div className="h-[cal c(100vh-64px)] flex items-center justify-center">
+    <div className="h-[calc(100vh-64px)] flex items-center justify-center">
       <Card>
         <h1 className='text-4xl font-bold my-2 text-center'>Inicia sesión</h1>
         <form onSubmit={onSubmit}>
@@ -32,7 +40,7 @@ function LoginPage() {
               required: true
             })}
           />
-          <Button>
+          <Button type="submit">
             Ingresa
           </Button>
           <div className="flex justify-between my-4">
@@ -44,6 +52,6 @@ function LoginPage() {
         </form>
       </Card>
     </div>
-  )
+  );
 }
-export default LoginPage
+export default LoginPage;

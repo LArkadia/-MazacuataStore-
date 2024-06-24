@@ -2,11 +2,14 @@ const express = require("express");
 const router = express.Router();
 const answer = require("../network/answers");
 const userController = require("../modules/client/index");
+const { auth } = require("../middleware/auth");
 
+router.post("/", addClient);
+router.use(auth(['admin']));
 router.get("/", allClients);
 router.get("/:id", oneClient);
 router.put("/", deleteClient);
-router.post("/", addClient);
+
 
 async function allClients(req, res) {
     try {
