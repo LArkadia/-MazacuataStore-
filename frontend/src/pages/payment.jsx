@@ -8,7 +8,7 @@ function Payment() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí iría la lógica para procesar el pago
+    // Aquí iría la lógica para procesar el pago, verificar que el numero de tarjeta sean 16 digitos, no haya expirado, cvv de 3 digitos
     console.log('Procesando pago con:', { cardNumber, expiryDate, cardholderName, cvv });
   };
 
