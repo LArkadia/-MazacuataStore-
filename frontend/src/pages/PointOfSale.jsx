@@ -31,7 +31,7 @@ function PointOfSale() {
 
         {/* Resultados de la búsqueda (libros) */}
         <div className="grid grid-cols-3 gap-4 mt-4">
-          {/* Mapea los resultados de la búsqueda y muestra cada libro */}
+          {/* Aqui se mapearan los resultados de la búsqueda y muestra cada libro */}
           {[...Array(10)].map((_, index) => ( 
             <div key={index} className="bg-gray-200 rounded-md p-4 shadow-md">
               <p className="text-center">Título del libro</p>
