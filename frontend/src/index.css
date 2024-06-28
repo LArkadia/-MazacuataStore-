@@ -6,3 +6,22 @@ body {
   background: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
 }
+
+
+.img-resize {
+  width: 150px; 
+  height: auto;
+}
+
+.flex-end-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.flex-item {
+  display: flex;
+  justify-content: flex-end;
+  width: 50%; 
+}
