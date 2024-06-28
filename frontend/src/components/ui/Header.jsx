@@ -30,6 +30,9 @@ export const Header = ({ isActive = false }) => {
             <NavLink to='/login' className={linkClass}>
               Login
             </NavLink>
+            <NavLink to='/cart' className={linkClass}>
+              Mi carrito
+            </NavLink>
           </div>
         </div>
       </div>
