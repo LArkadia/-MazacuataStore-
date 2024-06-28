@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import bookImage from '../assets/IMG/mazacuataBoss.png'; // Reemplaza con la ruta de tu imagen
+import bookImage from '../assets/IMG/mazacuataBoss.png'; 
 
 function Scanner() {
   const [isbn, setIsbn] = useState('');

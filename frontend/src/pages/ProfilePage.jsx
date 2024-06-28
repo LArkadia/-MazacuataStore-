@@ -60,7 +60,7 @@ function ProfilePage() {
       
       <h2 className="text-xl font-semibold mt-8 mb-4">Pedidos</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {/* Aquí puedes mapear tus pedidos reales */}
+        {/* Aquí se planea mapear tus pedidos del usuario */}
         {[...Array(4)].map((_, index) => (
           <div key={index} className="bg-gray-200 rounded-md p-4 flex items-center justify-center">
             <p>Libro {index + 1}</p>
