@@ -10,7 +10,6 @@ module.exports  =   function (dbInjected) {
 
     async function login(email, password) {
         const data = await db.loginQuery(TABLE, {email: email});
-
         return bcrypt.compare(password, data.password)
                 .then(result => {
                     if (result === true) {

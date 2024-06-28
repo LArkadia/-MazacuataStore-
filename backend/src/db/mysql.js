@@ -15,6 +15,7 @@ function connectionMysql() {
     connection  =   mysql.createConnection(dbconfig);
     console.log(connection);
     connection.connect((err)=>{
+        console.log(err)
         if (err) {
             console.log('[db.err]', err);
             setTimeout(connectionMysql, 200);
@@ -208,7 +209,8 @@ function deleteClient(table, data) {
 function loginQuery(table, consulta) {
     return new Promise((resolve, reject) =>{
         const query = `
-        SELECT * FROM ${table} AS a
+        SELECT a.*, u.tipo_usuario 
+        FROM ${table} AS a
         LEFT JOIN usuario AS u ON a.id = u.id
         LEFT JOIN cliente AS c ON a.id = c.id
         WHERE ?

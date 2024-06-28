@@ -1,10 +1,11 @@
 const express = require("express");
+const cors=require("cors");
 const router = express.Router();
 const answer = require("../network/answers");
 const userController = require("../modules/client/index");
 const { auth } = require("../middleware/auth");
 
-router.post("/", addClient);
+router.post("/",addClient);
 router.use(auth(['admin']));
 router.get("/", allClients);
 router.get("/:id", oneClient);
@@ -40,7 +41,8 @@ async function deleteClient(req, res, next) {
 
 async function addClient(req, res, next) {
     try {
-        const items = await userController.addClient(req.body);
+        const token = await userController.addClient(req.body);
+        console.log(token);
         answer.success(req, res, 'Client added!', 201);
     } catch (err) {
         next(err);
