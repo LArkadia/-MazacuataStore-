@@ -118,6 +118,7 @@ CREATE TABLE `libro` (
   `autor` varchar(255) NOT NULL,
   `editorial` varchar(255) NOT NULL,
   `edición` varchar(255) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
   `precio` float NOT NULL,
   `calificacion` float DEFAULT NULL,
   `portada` varchar(255) DEFAULT NULL,
@@ -135,21 +136,21 @@ CREATE TABLE `libro` (
 LOCK TABLES `libro` WRITE;
 /*!40000 ALTER TABLE `libro` DISABLE KEYS */;
 INSERT INTO `libro` VALUES 
-  ('01','Harry Potter y las tetas de fuego 2','MARCELUS WALLACE','Kanye Producciones','3rd',16.99,4.67,'https://imagessl5.casadellibro.com/a/l/s5/25/9788498386325.webp',48,NULL,NULL),
-  ('02','Harry, El Sucio Potter','El Bananero','Kanye Producciones','2nd',18.99,4.67,'https://imagessl0.casadellibro.com/a/l/s5/10/9788418173110.webp',48,NULL,NULL),
-  ('03','El Diario de Greg','Jeff Kimmey','Molino','2nd',18.99,4.67,'https://imagessl0.casadellibro.com/a/l/s5/20/9788498672220.webp',48,NULL,NULL),
-  ('04','Harry Potter y la piedra filosofal','J.K. Rowling','Salamandra','1st',15.99,4.5,'https://imagessl2.casadellibro.com/a/l/s5/62/9788498382662.webp',50,'Estante 1','Fantasía'),
-  ('05','Harry Potter y el prisionero de Azkaban','J.K. Rowling','Salamandra','1st',17.99,4.7,'https://imagessl8.casadellibro.com/a/l/s5/28/9788418173028.webp',40,'Estante 3','Fantasía'),
-  ('06','Quiúbole con...','Yordi Rosado','Aguilar','2st',299.00,4.7,'https://imagessl8.casadellibro.com/a/l/s5/78/9786073148078.webp',69,'Estante 2','Educación'),
-  ('07','MANUAL DE REDSTONE (MINECRAFT)','MOJANG AB','HarperKids','1st',329.00,5,'https://imagessl0.casadellibro.com/a/l/s5/30/9788418774430.webp',80,'Estante 2','Educación'),
-  ('08','Operating System Concepts','Abraham Silberschatz','John Wiley & Sons Inc','7th',564.02,4.4,'https://m.media-amazon.com/images/I/61XVj8lP3jL._SY342_.jpg',80,'Estante 2','Educación'),
-  ('09','Yo nunca vi televisión','31 minutos','Planeta Infantil México','1st',148.00,4.4,'https://imagessl7.casadellibro.com/a/l/s5/37/9786073916837.webp',32,'Estante 3','Infantil'),
-  ('10','Cañitas','Carlos Trejo','Planeta','1st',200.00,2.3,'https://m.media-amazon.com/images/I/71oGa5jc5WL._SY342_.jpg',666,'Estante 4','Terror'),
-  ('11','Robot Dreams','Sara Varon','NORMA EDITORIAL, S.A.','1st',300.00,4.6,'https://imagessl5.casadellibro.com/a/l/s5/25/9788467951325.webp',4,'Estante 3','Infantil'),
-  ('12','La rata con Thinner y otras anécdotas cotidianas de la sociedad latinoamericana actual','Omar Ramírez','Compiladores','1st',10.00,2.9,'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1655002861i/61269938.jpg',20,'Estante 6', 'Entretenimiento'),
-  ('13','Dune','FRANK HERBERT','DEBOLSILLO','2019',300.00,4.6,'https://imagessl7.casadellibro.com/a/l/s5/67/9788466342667.webp',100,'Estante 2','Ficción'),
-  ('14','Pedro Paramo','Juan Rulfo','RM Verlag, S.L','3rd',300.00,4.6,'https://imagessl6.casadellibro.com/a/l/s5/06/9788493442606.webp',249.90,'Estante 1','Novelas'),
-  ('15','Las batallas en el desierto','José Emilio Pacheco','Ediciones Era','3rd',159.90,4.7,'https://m.media-amazon.com/images/I/71f+UzEuVJL._SY342_.jpg',72,'Estante 1','Novelas');
+  ('01','Harry Potter y las tetas de fuego 2','MARCELUS WALLACE','Kanye Producciones','3rd','NULL',16.99,4.67,'https://imagessl5.casadellibro.com/a/l/s5/25/9788498386325.webp',48,NULL,NULL),
+  ('02','Harry, El Sucio Potter','El Bananero','Kanye Producciones','2nd','NULL',18.99,4.67,'https://imagessl0.casadellibro.com/a/l/s5/10/9788418173110.webp',48,NULL,NULL),
+  ('03','El Diario de Greg','Jeff Kimmey','Molino','2nd','NULL',18.99,4.67,'https://imagessl0.casadellibro.com/a/l/s5/20/9788498672220.webp',48,NULL,NULL),
+  ('04','Harry Potter y la piedra filosofal','J.K. Rowling','Salamandra','1st','NULL',15.99,4.5,'https://imagessl2.casadellibro.com/a/l/s5/62/9788498382662.webp',50,'Estante 1','Fantasía'),
+  ('05','Harry Potter y el prisionero de Azkaban','J.K. Rowling','Salamandra','1st','NULL',17.99,4.7,'https://imagessl8.casadellibro.com/a/l/s5/28/9788418173028.webp',40,'Estante 3','Fantasía'),
+  ('06','Quiúbole con...','Yordi Rosado','Aguilar','2st','Una guía para adolescentes que aborda cambios físicos y emocionales. Ofrece consejos sobre relaciones, sexualidad, drogas, alcohol, comunicación con los padres, internet y redes sociales. Busca ayudar a los jóvenes a tomar mejores decisiones.',299.00,4.7,'https://imagessl8.casadellibro.com/a/l/s5/78/9786073148078.webp',69,'Estante 2','Educación'),
+  ('07','MANUAL DE REDSTONE (MINECRAFT)','MOJANG AB','HarperKids','1st','Lleva tu creatividad al máximo con el Manual de redstone de Minecraft. Aprende a construir circuitos transformadores, desde sistemas de seguridad hasta dispositivos ingeniosos que mejorarán tu experiencia de juego.',329.00,5,'https://imagessl0.casadellibro.com/a/l/s5/30/9788418774430.webp',80,'Estante 2','Educación'),
+  ('08','Operating System Concepts','Abraham Silberschatz','John Wiley & Sons Inc','7th','Aborda los sistemas más recientes y los conceptos fundamentales que han perdurado en la evolución de los sistemas operativos, proporcionando una base sólida para entender los detalles de sistemas específicos.',564.02,4.4,'https://m.media-amazon.com/images/I/61XVj8lP3jL._SY342_.jpg',80,'Estante 2','Educación'),
+  ('09','Yo nunca vi televisión','31 minutos','Planeta Infantil México','1st','"31 Minutos: ¡Tulio, estamos al aire!" sigue a Tulio Triviño y su equipo mientras enfrentan la presión de anunciar una noticia importante. Basado en el show "Yo nunca vi televisión porque es muy fome".',148.00,4.4,'https://imagessl7.casadellibro.com/a/l/s5/37/9786073916837.webp',32,'Estante 3','Infantil'),
+  ('10','Cañitas','Carlos Trejo','Planeta','1st','Relata los eventos paranormales que atormentan a la familia de Carlos Trejo desde 1982. Describe la leyenda de la casa embrujada en la calle Cañitas, donde una sesión de ouija abrió la puerta a fenómenos sobrenaturales.',200.00,2.3,'https://m.media-amazon.com/images/I/71oGa5jc5WL._SY342_.jpg',666,'Estante 4','Terror'),
+  ('11','Robot Dreams','Sara Varon','NORMA EDITORIAL, S.A.','1st','Cuenta la historia de amistad entre Perro y Robot, interrumpida cuando Robot se oxida en la playa y Perro lo abandona. Ambos buscan nuevas compañías mientras sueñan con un futuro mejor, en una historia sobre amistad, pérdida y perdón.',300.00,4.6,'https://imagessl5.casadellibro.com/a/l/s5/25/9788467951325.webp',4,'Estante 3','Infantil'),
+  ('12','La rata con Thinner y otras anécdotas cotidianas de la sociedad latinoamericana actual','Omar Ramírez','Compiladores','1st','Anécdotas de la sociedad latinoamericana es una compilación de Omar Ramírez que muestra el lado más retorcido de la sociedad. Incluye cuentos asquerosos y cuestionables, como la historia de una rata muerta en el ano de alguien y un amor transexual.',10.00,2.9,'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1655002861i/61269938.jpg',20,'Estante 6', 'Entretenimiento'),
+  ('13','Dune','FRANK HERBERT','DEBOLSILLO','2019','En el planeta Arrakis, fuente de la especia melange, el duque Leto Atreides y su familia son traicionados. Su hijo Paul enfrenta a los Fremen y gusanos de arena gigantes. "Dune" combina aventura, misticismo, política y ecologismo.',300.00,4.6,'https://imagessl7.casadellibro.com/a/l/s5/67/9788466342667.webp',100,'Estante 2','Ficción'),
+  ('14','Pedro Paramo','Juan Rulfo','RM Verlag, S.L','3rd','Por el 50 aniversario, la Fundación Juan Rulfo autorizó una versión original de esta novela. Esta edición garantiza la fidelidad de la obra que revolucionó la literatura con su estilo fragmentado y representación de la idiosincrasia mexicana.',300.00,4.6,'https://imagessl6.casadellibro.com/a/l/s5/06/9788493442606.webp',249.90,'Estante 1','Novelas'),
+  ('15','Las batallas en el desierto','José Emilio Pacheco','Ediciones Era','3rd','Es una novela breve que explora la corrupción social y política, la transformación de México y la memoria colectiva de una ciudad amada y criticada. Su estructura permite múltiples interpretaciones y crea una conexión duradera con el lector.',159.90,4.7,'https://m.media-amazon.com/images/I/71f+UzEuVJL._SY342_.jpg',72,'Estante 1','Novelas');
 /*!40000 ALTER TABLE `libro` ENABLE KEYS */;
 UNLOCK TABLES;
 
