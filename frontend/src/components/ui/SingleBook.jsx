@@ -31,14 +31,12 @@ export const SingleBook = ({params}) => {
       <main className="container mx-auto">
         <section className="mt-8">
           <div className="flex flex-col md:flex-row gap-8">
-            <div className="md:w-1/4 ml-4"> {/* Portada: 1/4 del ancho */}
+            <div className="md:w-1/4 ml-4 flex items-center justify-center"> {/* Portada: 1/4 del ancho */}
               <img
                 src={elem.portada}
                 alt={elem.titulo}
-                className="w-full h-auto rounded-lg shadow-md"
-                style={{
-                  aspectRatio: '329 / 466',
-                }}
+                className="w-64 h-auto rounded-lg shadow-md"
+                
               />
             </div>
   
@@ -48,7 +46,7 @@ export const SingleBook = ({params}) => {
                 <span className="font-semibold">Autor:</span> {elem.autor}
               </p>
               <p className="text-gray-600">
-                <span className="font-semibold">Edición:</span> {elem.edicion}
+                <span className="font-semibold">Edición:</span> {elem.edición}
               </p>
               <p className="text-gray-600">
                 <span className="font-semibold">Editorial:</span> {elem.editorial}
