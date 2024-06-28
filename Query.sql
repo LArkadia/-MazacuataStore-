@@ -134,12 +134,22 @@ CREATE TABLE `libro` (
 
 LOCK TABLES `libro` WRITE;
 /*!40000 ALTER TABLE `libro` DISABLE KEYS */;
-INSERT INTO `libro` VALUES ('2','Harry Potter y las tetas de fuego 2','MARCELUS WALLACE','Kanye Producciones','3rd',16.99,4.67,'https://example.com/portada2.jpg',48,NULL,NULL),('3','Harry, El Sucio Potter','El Bananero','Kanye Producciones','2nd',18.99,4.67,'https://imagessl0.casadellibro.com/a/l/s5/20/9788498672220.webp',48,NULL,NULL),('590','chetos','El Bananero','Kanye Producciones','2nd',18.99,4.67,'https://example.com/portada2.jpg',48,NULL,NULL),('9780061122415','Harry Potter y la piedra filosofal','J.K. Rowling','Salamandra','1st',15.99,4.5,'https://example.com/portada1.jpg',50,'Estante 1','Fantasía'),('9780439139601','Harry Potter y el prisionero de Azkaban','J.K. Rowling','Salamandra','1st',17.99,4.7,'https://example.com/portada3.jpg',40,'Estante 3','Fantasía'),('9786073148078','Quiúbole con...','Yordi Rosado','Aguilar','2st',299.00,4.7,'https://imagessl8.casadellibro.com/a/l/s5/78/9786073148078.webp',69,'Estante 2','Educación'),('9788418774430','MANUAL DE REDSTONE (MINECRAFT)','MOJANG AB','HarperKids','1st',329.00,5,'https://imagessl0.casadellibro.com/a/l/s5/30/9788418774430.webp',80,'Estante 2','Educación'),('8080','Operating System Concepts','Abraham Silberschatz','John Wiley & Sons Inc','7th',564.02,4.4,'https://m.media-amazon.com/images/I/61XVj8lP3jL._SY342_.jpg',80,'Estante 2','Educación'),('9786073916837','Yo nunca vi televisión','31 minutos','Planeta Infantil México','1st',148.00,4.4,'https://imagessl7.casadellibro.com/a/l/s5/37/9786073916837.webp',32,'Estante 3','Infantil'),('9789703701148','Cañitas','Carlos Trejo','Planeta','1st',200.00,2.3,'https://m.media-amazon.com/images/I/71oGa5jc5WL._SY342_.jpg',666,'Estante 4','Terror'),
-  ('9788467951325','Robot Dreams','Sara Varon','NORMA EDITORIAL, S.A.','1st',300.00,4.6,'https://imagessl5.casadellibro.com/a/l/s5/25/9788467951325.webp',4,'Estante 3','Infantil'),
-  ('0','La rata con Thinner y otras anécdotas cotidianas de la sociedad latinoamericana actual','Omar Ramírez','Compiladores','1st',10.00,2.9,'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1655002861i/61269938.jpg',20,'Estante 6', 'Entretenimiento'),
-  ('9788466342667','Dune','FRANK HERBERT','DEBOLSILLO','2019',300.00,4.6,'https://imagessl7.casadellibro.com/a/l/s5/67/9788466342667.webp',100,'Estante 2','Ficción'),
-  ('9788493442606','Pedro Paramo','Juan Rulfo','RM Verlag, S.L','3rd',300.00,4.6,'https://imagessl6.casadellibro.com/a/l/s5/06/9788493442606.webp',249.90,'Estante 1','Novelas'),
-  ('9786074450552','Las batallas en el desierto','José Emilio Pacheco','Ediciones Era','3rd',159.90,4.7,'https://m.media-amazon.com/images/I/71f+UzEuVJL._SY342_.jpg',72,'Estante 1','Novelas');
+INSERT INTO `libro` VALUES 
+  ('01','Harry Potter y las tetas de fuego 2','MARCELUS WALLACE','Kanye Producciones','3rd',16.99,4.67,'https://imagessl5.casadellibro.com/a/l/s5/25/9788498386325.webp',48,NULL,NULL),
+  ('02','Harry, El Sucio Potter','El Bananero','Kanye Producciones','2nd',18.99,4.67,'https://imagessl0.casadellibro.com/a/l/s5/10/9788418173110.webp',48,NULL,NULL),
+  ('03','El Diario de Greg','Jeff Kimmey','Molino','2nd',18.99,4.67,'https://imagessl0.casadellibro.com/a/l/s5/20/9788498672220.webp',48,NULL,NULL),
+  ('04','Harry Potter y la piedra filosofal','J.K. Rowling','Salamandra','1st',15.99,4.5,'https://imagessl2.casadellibro.com/a/l/s5/62/9788498382662.webp',50,'Estante 1','Fantasía'),
+  ('05','Harry Potter y el prisionero de Azkaban','J.K. Rowling','Salamandra','1st',17.99,4.7,'https://imagessl8.casadellibro.com/a/l/s5/28/9788418173028.webp',40,'Estante 3','Fantasía'),
+  ('06','Quiúbole con...','Yordi Rosado','Aguilar','2st',299.00,4.7,'https://imagessl8.casadellibro.com/a/l/s5/78/9786073148078.webp',69,'Estante 2','Educación'),
+  ('07','MANUAL DE REDSTONE (MINECRAFT)','MOJANG AB','HarperKids','1st',329.00,5,'https://imagessl0.casadellibro.com/a/l/s5/30/9788418774430.webp',80,'Estante 2','Educación'),
+  ('08','Operating System Concepts','Abraham Silberschatz','John Wiley & Sons Inc','7th',564.02,4.4,'https://m.media-amazon.com/images/I/61XVj8lP3jL._SY342_.jpg',80,'Estante 2','Educación'),
+  ('09','Yo nunca vi televisión','31 minutos','Planeta Infantil México','1st',148.00,4.4,'https://imagessl7.casadellibro.com/a/l/s5/37/9786073916837.webp',32,'Estante 3','Infantil'),
+  ('10','Cañitas','Carlos Trejo','Planeta','1st',200.00,2.3,'https://m.media-amazon.com/images/I/71oGa5jc5WL._SY342_.jpg',666,'Estante 4','Terror'),
+  ('11','Robot Dreams','Sara Varon','NORMA EDITORIAL, S.A.','1st',300.00,4.6,'https://imagessl5.casadellibro.com/a/l/s5/25/9788467951325.webp',4,'Estante 3','Infantil'),
+  ('12','La rata con Thinner y otras anécdotas cotidianas de la sociedad latinoamericana actual','Omar Ramírez','Compiladores','1st',10.00,2.9,'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1655002861i/61269938.jpg',20,'Estante 6', 'Entretenimiento'),
+  ('13','Dune','FRANK HERBERT','DEBOLSILLO','2019',300.00,4.6,'https://imagessl7.casadellibro.com/a/l/s5/67/9788466342667.webp',100,'Estante 2','Ficción'),
+  ('14','Pedro Paramo','Juan Rulfo','RM Verlag, S.L','3rd',300.00,4.6,'https://imagessl6.casadellibro.com/a/l/s5/06/9788493442606.webp',249.90,'Estante 1','Novelas'),
+  ('15','Las batallas en el desierto','José Emilio Pacheco','Ediciones Era','3rd',159.90,4.7,'https://m.media-amazon.com/images/I/71f+UzEuVJL._SY342_.jpg',72,'Estante 1','Novelas');
 /*!40000 ALTER TABLE `libro` ENABLE KEYS */;
 UNLOCK TABLES;
 
