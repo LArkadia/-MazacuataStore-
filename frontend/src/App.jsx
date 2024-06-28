@@ -11,6 +11,7 @@ import Scanner from "./pages/Scanner";
 import POS from "./pages/PointOfSale";
 import Pago from "./pages/payment";
 import Stats from "./pages/Statistics";
+import CRUD from "./pages/CRUD";
 import { MianContent } from './components/MianContent';
 import NotFound from './pages/NotFound';
 
@@ -30,6 +31,7 @@ const routes=createBrowserRouter(
       <Route path='/puntodeventa' element={<POS/>}/>
       <Route path='/payment' element={<Pago/>}/>
       <Route path='/stats' element={<Stats/>}/>
+      <Route path='/crud' element={<CRUD/>}/>
       <Route path="*" element={<NotFound/>}/>
     </Route>
   )
