@@ -101,7 +101,7 @@ function CRUD() {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Menú lateral */}
-      <div className="w-1/4 bg-white p-4">
+      <div className="w-1/6 bg-white p-4">
         <h2 className="text-gray-800 text-lg font-semibold mb-4">Tablas</h2>
         <ul className="space-y-2">
           {['Clientes', 'Compras', 'Libros', 'Tickets', 'Usuarios', 'Ventas'].map(tabla => (
@@ -130,7 +130,16 @@ function CRUD() {
                 <input type="text" name="id" placeholder="ID" value={newCliente.id} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="nombre" placeholder="Nombre" value={newCliente.nombre} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="apellidos" placeholder="Apellidos" value={newCliente.apellidos} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
-                <input type="text" name="tipoUsuario" placeholder="Tipo de Usuario" value={newCliente.tipoUsuario} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
+                <select 
+                  name="tipoUsuario" 
+                  value={newCliente.tipoUsuario} 
+                  onChange={handleInputChange} 
+                  className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300"
+                >
+                  <option value="">Seleccione el tipo de usuario</option>
+                  <option value="activo">Activo</option>
+                  <option value="inactivo">Inactivo</option>
+                </select>
                 <input type="text" name="direccion" placeholder="Dirección" value={newCliente.direccion} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="rfc" placeholder="RFC" value={newCliente.rfc} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
               </>
@@ -171,7 +180,16 @@ function CRUD() {
                 <input type="text" name="id" placeholder="ID" value={newUsuario.id} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="nombre" placeholder="Nombre" value={newUsuario.nombre} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="apellidos" placeholder="Apellidos" value={newUsuario.apellidos} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
-                <input type="text" name="tipo_usuario" placeholder="Tipo de Usuario" value={newUsuario.tipo_usuario} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
+                <select 
+                  name="tipo_usuario" 
+                  value={newUsuario.tipo_usuario} 
+                  onChange={handleInputChange} 
+                  className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300"
+                >
+                  <option value="">Seleccione el tipo de usuario</option>
+                  <option value="admni">Admin</option>
+                  <option value="vendedor">Vendedor</option>
+                </select>
                 <input type="text" name="descripcion" placeholder="Descripción" value={newUsuario.descripcion} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="rfc" placeholder="RFC" value={newUsuario.rfc} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
               </>
