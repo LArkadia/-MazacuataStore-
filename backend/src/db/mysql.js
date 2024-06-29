@@ -15,6 +15,7 @@ function connectionMysql() {
     connection  =   mysql.createConnection(dbconfig);
     console.log(connection);
     connection.connect((err)=>{
+        console.log(err)
         if (err) {
             console.log('[db.err]', err);
             setTimeout(connectionMysql, 200);

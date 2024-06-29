@@ -1,8 +1,9 @@
 import { Button, Card, Input, Label } from "../components/ui";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import  axios  from "axios";
-
+import { useState } from "react";
+const ownToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzEsImVtYWlsIjoiaWxvdmVwYXBlcjJAZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MTk1NDQzMTJ9.IsanEamQRWitFecYMt75qdxQt4HBVUu2FhoNo4kB5BA";
 function RegisterPage() {
 
   const {
@@ -10,14 +11,25 @@ function RegisterPage() {
     handleSubmit, 
     formState: {errors}
   } = useForm();
-
+  const [goLogin,setGoLogin]=useState(false);
   const onSubmit = handleSubmit(async (data) => {
-    const res = await  axios.post('http://localhost:4000/api/users', data, {
-      withCredentials: true
-    })
-    console.log(res)
+    try{
+      data["tipo_usuario"]="activo";
+      data["id"]=0;
+    const res = await  axios.post('http://localhost:4000/api/clients', data, {
+      headers:{
+        "Authorization":"Bearer "+ownToken,
+      },
+    });
+    setGoLogin(true);
+    alert("Todo salió correcto");
+    }catch(err){
+      console.log(err);
+      alert("Ocurrio un error");
+    }
   });
-
+  if(localStorage.getItem('email')!=null && localStorage.getItem('token')!=null) return <Navigate to={"../"}/>;
+  if(goLogin) return <Navigate to={"../login"}/>; 
   return (
     <div className='h-[calc(100vh-64px)] flex items-center justify-center'>
       <Card>
@@ -44,6 +56,17 @@ function RegisterPage() {
           />
           {
             errors.apellidos && <p className="text-red-500">Escribe tu apellido</p>
+          }
+          <Label htmlFor="rfc">
+            Rfc
+          </Label>
+          <Input 
+            placeholder="Ingresa tu rfc"
+            {...register('rfc', {
+              required: true})}
+          />
+          {
+            errors.rfc && <p className="text-red-500">Escribe tu nombre</p>
           }
           <Label htmlFor="direccion">
             Dirección

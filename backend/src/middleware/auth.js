@@ -8,7 +8,6 @@ module.exports.auth = (roles) => (req, res, next) => {
 
         const token = rawToken.replace('Bearer ', '');
         const payload = verify(token);
-
         if (!roles.includes(payload.role))
             throw new Error('Forbidden');
         req.authorizer = payload;

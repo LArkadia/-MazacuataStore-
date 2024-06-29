@@ -1,26 +1,33 @@
 import { Card, Input, Button, Label } from "../components/ui";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 function LoginPage() {
   const { register, handleSubmit } = useForm();
-
+  const [goBackHome,setgoBackHome]=useState(false);
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
     try {
       const res = await axios.post('http://localhost:4000/api/auth/login', data);
-      console.log(res.data);
       if (res.data.body) {
-        console.log('Token:', res.data.body);
+        localStorage.setItem("email",data.email);
+        localStorage.setItem("token", res.data.body);
+        alert("Loggin completado con exito");
+        setgoBackHome(true);
       } else {
         console.log('No se recibió un token en la respuesta.');
       }
     } catch (error) {
+      alert("Upps,Ocurrio un error")
       console.error('Error al realizar la solicitud:', error);
     }
   });
-
+  if(localStorage.getItem("email")!=null && localStorage.getItem("token")!=null){
+    alert("Usuario loggeado");
+    return <Navigate to={"../"}/>
+  }
+  if(goBackHome) return <Navigate to={"../"}/>
   return (
     <div className="h-[calc(100vh-64px)] flex items-center justify-center">
       <Card>
