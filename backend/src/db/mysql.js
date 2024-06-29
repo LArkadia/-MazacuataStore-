@@ -164,7 +164,7 @@ function oneClient(table, id) {
     return new Promise((resolve, reject)=>{
         connection.query(`SELECT * FROM ${table} WHERE id=${id}`, (error, result)=>{
             return error ? reject(error)    :   resolve(result);
-        })
+        });
     });
 }
 function addClient(table, data) {
@@ -190,20 +190,48 @@ function upsertClient(table, data) {
 }
 
 function deleteClient(table, data) {
-  return  new Promise((resolve, reject)=>{
-    const query =   `DELETE FROM ${table} WHERE id = ?`;
-    console.log('executing query', query, 'with data: ', data)
-    connection.query(query, [data], (error, result) =>{
-        if (error) {
-            console.error('Error executing query:', error);
-            return reject(error);
-        }
-        console.log('Query executed successfully:', result); 
-        resolve(result);
+    return  new Promise((resolve, reject)=>{
+        const query =   `DELETE FROM ${table} WHERE id = ?`;
+        console.log('executing query', query, 'with data: ', data);
+        connection.query(query, [data], (error, result) =>{
+            if (error) {
+                console.error('Error executing query:', error);
+                return reject(error);
+            }
+            console.log('Query executed successfully:', result); 
+            resolve(result);
     });
   });
 }
 
+/* VENTAS */
+
+function pointOfSale(table, data) {
+    
+        return new Promise((resolve, reject)=>{
+            const query = `INSERT INTO ${table} SET ? ON DUPLICATE KEY UPDATE ?`
+            console.log('executing query', query, 'with data: ', data);
+            connection.query(query, [data, data], (error, result)=>{
+                if (error) {
+                    console.error('Error executing query');
+                    return reject(error);
+                }
+                console.log('Query executed succesfully: ', result);
+                resolve(result);
+            });
+        });
+    
+}
+
+function getSells(table) {
+    return new Promise((resolve, reject)=>{
+        const query = `SELECT * FROM ${table}`;
+        console.log('executing query', query, 'with data: ', data);
+        connection.query(query, (error, result)=>{
+            return error ? reject(error)    :   resolve(result);
+        })
+    });
+}
 /* LOGIN */
 function loginQuery(table, consulta) {
     return new Promise((resolve, reject) =>{
@@ -235,5 +263,7 @@ module.exports  =   {
     oneClient,
     deleteClient,
     addClient,
-    loginQuery
+    loginQuery,
+    pointOfSale,
+    getSells
 }
