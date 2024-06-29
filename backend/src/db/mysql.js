@@ -265,22 +265,30 @@ function getPurchasesOnStates(table,data){
         left join auth  as a ON c.id_usuario=a.id
         WHERE c.estado_compra="${data.estado_compra}" AND a.email="${data.email}";
         `;
-        console.log(query);
         connection.query(query,(error, result)=>{
             return error ? reject(error) : resolve(result);
         });
     });
 }
 function addPurchase(table,data){
- console.log(data);
+     /*id_usuario,isbn,cantidad*/
     if(data){
         return upsert(table,data);
     }
 }
 function updatePurchase(table,data){
-    if(data){
-        return upsert(table,data);
-    }
+    return new Promise((resolve, reject)=>{
+        const query = `UPDATE  ${table} SET estado_compra ='${data.estado_compra}' where ID_compra=${data.ID_compra}`
+        console.log('executing query', query, 'with data: ', data);
+        connection.query(query, [data, data], (error, result)=>{
+            if (error) {
+                console.error('Error executing query');
+                return reject(error);
+            }
+            console.log('Query executed succesfully: ', result);
+            resolve(result);
+        });
+    });
 }
 
 

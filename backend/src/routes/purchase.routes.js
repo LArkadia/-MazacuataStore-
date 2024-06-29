@@ -37,7 +37,10 @@ async function addPurchase(req,res){
 async function payPurchase(req,res){
     try{
         const item=await purpushController.setCompletedPurpush(req.body);
-        answer.success(req, res, item, 200);
+        let msg="";
+        if(item['affectedRows'])msg="Pago Exitoso";
+        else msg="Algo salio mal"
+        answer.success(req, res, {"response":msg}, 200);
     }catch(err){
         answer.error(req,res,err,500);
     }
