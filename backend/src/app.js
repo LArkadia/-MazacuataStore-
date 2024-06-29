@@ -29,10 +29,10 @@ app.use("/api/books", books);
 app.use("/api/users", users);
 app.use("/api/clients", clients);
 app.use("/api/auth", auth);
-<<<<<<< HEAD
+
 app.use("/api/purpush",purpushs)
-=======
+
 app.use("/api/pointOfSale", sales);
->>>>>>> aa22def61dd4615d9c937a3ecc642056923c955a
+
 app.use(error);
 module.exports = app;

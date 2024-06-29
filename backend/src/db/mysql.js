@@ -301,13 +301,10 @@ module.exports  =   {
     deleteClient,
     addClient,
     loginQuery,
-<<<<<<< HEAD
     /*Purpush*/
     getPurpushsOnEstates,
     addPurpush,
-    updatePurpush   
-=======
+    updatePurpush,   
     pointOfSale,
     getSells
->>>>>>> aa22def61dd4615d9c937a3ecc642056923c955a
 }
