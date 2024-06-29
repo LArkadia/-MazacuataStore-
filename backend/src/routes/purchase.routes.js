@@ -6,10 +6,11 @@ const { auth } = require("../middleware/auth");
 
 
 router.use(auth(['admin']));
-router.get("/actived", allActivePurpushs);
-router.get("/canceled",allCanceledPurpushs);
-router.post("/add", addPurpush);
-async function allActivePurpushs(req,res){
+router.get("/actived", allActivePurchases);
+router.get("/canceled",allCanceledPurchases);
+router.post("/add", addPurchase);
+router.post("/pay",payPurchase);
+async function allActivePurchases(req,res){
     try{
         const items=await purpushController.getActivePurpushs(req.body);
         answer.success(req, res, items, 200);
@@ -17,7 +18,7 @@ async function allActivePurpushs(req,res){
         answer.error(req,res,err,500);
     }
 }
-async function allCanceledPurpushs(req,res){
+async function allCanceledPurchases(req,res){
     try{
         const items=await purpushController.getCanceledPurpushs(req.body);
         answer.success(req, res, items, 200);
@@ -25,9 +26,17 @@ async function allCanceledPurpushs(req,res){
         answer.error(req,res,err,500);
     }
 }
-async function addPurpush(req,res){
+async function addPurchase(req,res){
     try{
         const item=await purpushController.registerPurpush(req.body);
+        answer.success(req, res, "Compra agregada", 200);
+    }catch(err){
+        answer.error(req,res,err,500);
+    }
+}
+async function payPurchase(req,res){
+    try{
+        const item=await purpushController.setCompletedPurpush(req.body);
         answer.success(req, res, item, 200);
     }catch(err){
         answer.error(req,res,err,500);

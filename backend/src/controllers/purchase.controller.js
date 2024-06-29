@@ -1,6 +1,6 @@
 const purpush = require('../modules/purpush');
 const auth = require('../modules/auth');
-const TABLE = 'cliente';
+const TABLE = 'Compra';
 
 module.exports =  function(dbInjected){
 
@@ -14,30 +14,30 @@ module.exports =  function(dbInjected){
         return true;
     }
     function getCanceledPurpushs(data){
-        data['estado']='cancelada';
-        return db.getPurpushsOnEstates(TABLE,data);
+        data['estado_compra']='cancelada';
+        return db.getPurchasesOnStates(TABLE,data);
     }
     function getActivePurpushs(data){
-        data['estado']='pendiente';
+        data['estado_compra']='pendiente';
         console.log(data);
-        return db.getPurpushsOnEstates(TABLE,data);
+        return db.getPurchasesOnStates(TABLE,data);
     }
     function getCompletedPurpushs(data){
-        data['estado']='completada';
-        return db.getPurpushsOnEstates(TABLE,data);
+        data['estado_compra']='completada';
+        return db.getPurchasesOnStates(TABLE,data);
     }
     function setCompletedPurpush(data){
-        data['estado']='completada';
-        return db.updatePurpush(TABLE,data);
+        data['estado_compra']='completada';
+        return db.updatePurchase(TABLE,data);
     }
     function setCanceledPurpush(data){
-        data['estado']='cancelada';
+        data['estado_compra']='cancelada';
         return db.updatePurpush(TABLE,data);
     }
     function registerPurpush(data){
-        data['estado']='pendiente';
-        return db.addPurpush(TABLE,data);
-    }    
+        data['estado_compra']='pendiente';
+        return db.addPurchase(TABLE,data);
+    }   
     return {
         getActivePurpushs,
         getCanceledPurpushs,
