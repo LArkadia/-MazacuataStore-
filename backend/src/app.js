@@ -4,6 +4,7 @@ const config = require("./config");
 const cors = require('cors');
 
 const books = require("./routes/book.routes");
+const sales = require("./routes/sell.routes"); 
 const users = require("./routes/user.routes");
 const clients = require("./routes/client.routes");
 const auth = require("./modules/auth/auth.routes");
@@ -28,6 +29,10 @@ app.use("/api/books", books);
 app.use("/api/users", users);
 app.use("/api/clients", clients);
 app.use("/api/auth", auth);
+<<<<<<< HEAD
 app.use("/api/purpush",purpushs)
+=======
+app.use("/api/pointOfSale", sales);
+>>>>>>> aa22def61dd4615d9c937a3ecc642056923c955a
 app.use(error);
 module.exports = app;
