@@ -8,6 +8,7 @@ const sales = require("./routes/sell.routes");
 const users = require("./routes/user.routes");
 const clients = require("./routes/client.routes");
 const auth = require("./modules/auth/auth.routes");
+const purchases=require("./routes/purchase.routes");
 
 //Errors
 const error = require('./network/error')
@@ -28,6 +29,10 @@ app.use("/api/books", books);
 app.use("/api/users", users);
 app.use("/api/clients", clients);
 app.use("/api/auth", auth);
+
+app.use("/api/purchase",purchases)
+
 app.use("/api/pointOfSale", sales);
+
 app.use(error);
 module.exports = app;
