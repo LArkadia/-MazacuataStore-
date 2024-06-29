@@ -64,13 +64,14 @@ function addBook(table, data) {
         return upsert(table, data);
     }
 }
+/*Generic*/
 function add(table, data) {
 
     if (data) {
         return upsert(table, data);
     }
 }
-
+/*Generic*/
 function upsert(table, data) {
     return new Promise((resolve, reject)=>{
         const query = `INSERT INTO ${table} SET ? ON DUPLICATE KEY UPDATE ?`
@@ -84,6 +85,13 @@ function upsert(table, data) {
             resolve(result);
         })
     })
+}
+function getGeneric(table,data){
+    return new Promise((resolve, reject)=>{
+        connection.query(`SELECT * FROM ${table} WHERE ?`, data,(error, result)=>{
+            return error ? reject(error)    :   resolve(result);
+        })
+    });
 }
 
 function deleteBook(table, data) {
@@ -220,6 +228,34 @@ function loginQuery(table, consulta) {
         })
     });
 }
+/*Purpush*/
+function getPurpushsOnEstates(table,data){
+    return new Promise((resolve,reject)=>{
+        const query=`
+        select c.ID_compra,b.titulo,b.precio as precio_unitario,c.precio_total from compra as c 
+        left join libro as b ON b.isbn=c.isbn 
+        left join auth  as a ON c.id_usuario=a.id
+        WHERE c.estado_compra="${data.estado}" AND a.email="${data.email}";
+        `;
+        console.log(query);
+        connection.query(query,(error, result)=>{
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+function addPurpush(table,data){
+    if(data){
+        return upsert(table,data);
+    }
+}
+function updatePurpush(table,data){
+    if(data){
+        return upsert(table,data);
+    }
+}
+
+
+ 
 module.exports  =   {
     all,
     one,
@@ -236,5 +272,9 @@ module.exports  =   {
     oneClient,
     deleteClient,
     addClient,
-    loginQuery
+    loginQuery,
+    /*Purpush*/
+    getPurpushsOnEstates,
+    addPurpush,
+    updatePurpush   
 }
