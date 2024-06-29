@@ -7,6 +7,14 @@ body {
   color: rgb(0, 0, 0);
 }
 
+th, td {
+  padding-right: 8px; /* Espacio a la derecha de cada celda */
+}
+
+.table-container {
+  max-height: 400px; /* Ajusta este valor según tus necesidades */
+  overflow-y: auto;
+}
 
 .img-resize {
   width: 150px; 
