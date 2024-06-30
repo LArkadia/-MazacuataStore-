@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { validateNombre, validateApellidos, validateDireccion, validateRFC } from './validationCRUD';
 
 
 function CRUD() {
@@ -127,7 +128,6 @@ function CRUD() {
             {/* Campos del formulario */}
             {selectedTable === 'Clientes' && (
               <>
-                <input type="text" name="id" placeholder="ID" value={newCliente.id} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="nombre" placeholder="Nombre" value={newCliente.nombre} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="apellidos" placeholder="Apellidos" value={newCliente.apellidos} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <select 
@@ -168,8 +168,6 @@ function CRUD() {
             )}
             {selectedTable === 'Tickets' && (
               <>
-                <input type="text" name="id_ticket" placeholder="ID Ticket" value={newTicket.id_ticket} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
-                <input type="text" name="id_compra" placeholder="ID Compra" value={newTicket.id_compra} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="isbn" placeholder="ISBN" value={newTicket.isbn} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="cantidad" placeholder="Cantidad" value={newTicket.cantidad} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="precio_venta" placeholder="Precio de Venta" value={newTicket.precio_venta} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
@@ -177,7 +175,6 @@ function CRUD() {
             )}
             {selectedTable === 'Usuarios' && (
               <>
-                <input type="text" name="id" placeholder="ID" value={newUsuario.id} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="nombre" placeholder="Nombre" value={newUsuario.nombre} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="apellidos" placeholder="Apellidos" value={newUsuario.apellidos} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <select 

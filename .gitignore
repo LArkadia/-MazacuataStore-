@@ -14,3 +14,4 @@ database/*.qp
 venv
 #Doc for configuration DB
 .env
+backend/.env
