@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { validateNombre, validateApellidos, validateDireccion, validateRFC } from './validationCRUD';
-
 
 function CRUD() {
   const [selectedTable, setSelectedTable] = useState('Clientes'); // Tabla seleccionada por defecto
@@ -14,7 +12,7 @@ function CRUD() {
   const [newCliente, setNewCliente] = useState({ id: '', nombre: '', apellidos: '', tipoUsuario: '', direccion: '', rfc: '' }); // Campos de clientes
   const [newLibro, setNewLibro] = useState({ isbn: '', titulo: '', autor: '', editorial: '', edicion: '', descripcion: '', precio: '', calificacion: '', portada: '', unidades_disponibles: '', ubicacion: '', genero: '' }); // Campos de libros
   const [newTicket, setNewTicket] = useState({ id_ticket: '', id_compra: '', isbn: '', cantidad: '', precio_venta: '' }); // Campos de tickets
-  const [newUsuario, setNewUsuario] = useState({ id: '', nombre: '', apellidos: '', tipo_usuario: '', descripcion: '', rfc: '' }); // Campos de usuarios
+  const [newUsuario, setNewUsuario] = useState({ id: '', nombre: '', apellidos: '', tipo_usuario: '', direccion: '', rfc: '' }); // Campos de usuarios
 
   const [editMode, setEditMode] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -37,22 +35,131 @@ function CRUD() {
     }
   };
 
-  const handleAddItem = () => { 
+  const handleAddItem = () => {
+    let isValid = true; // Variable para controlar si todos los campos son válidos
+  
+    // Validación de campos según la tabla seleccionada
     if (selectedTable === 'Clientes') {
-      setClientes([...clientes, newCliente]);
-      setNewCliente({ id: '', nombre: '', apellidos: '', tipoUsuario: '', direccion: '', rfc: '' });
+      isValid = validateCliente(newCliente); 
     } else if (selectedTable === 'Libros') {
-      setLibros([...libros, newLibro]);
-      setNewLibro({ isbn: '', titulo: '', autor: '', editorial: '', edicion: '', descripcion: '', precio: '', calificacion: '', portada: '', unidades_disponibles: '', ubicacion: '', genero: '' });
+      isValid = validateLibro(newLibro);
     } else if (selectedTable === 'Tickets') {
-      setTickets([...tickets, newTicket]);
-      setNewTicket({ id_ticket: '', id_compra: '', isbn: '', cantidad: '', precio_venta: '' });
+      // No hay validaciones específicas para Tickets en este ejemplo
     } else if (selectedTable === 'Usuarios') {
-      setUsuarios([...usuarios, newUsuario]);
-      setNewUsuario({ id: '', nombre: '', apellidos: '', tipo_usuario: '', descripcion: '', rfc: '' });
+      isValid = validateUsuario(newUsuario);
     }
-    setEditMode(false);
+  
+    if (isValid) {
+      // Si todos los campos son válidos, procede con la adición del elemento
+      if (selectedTable === 'Clientes') {
+        setClientes([...clientes, newCliente]);
+        setNewCliente({ id: '', nombre: '', apellidos: '', tipoUsuario: '', direccion: '', rfc: '' });
+      } else if (selectedTable === 'Libros') {
+        setLibros([...libros, newLibro]);
+        setNewLibro({ isbn: '', titulo: '', autor: '', editorial: '', edicion: '', descripcion: '', precio: '', calificacion: '', portada: '', unidades_disponibles: '', ubicacion: '', genero: '' });
+      } else if (selectedTable === 'Tickets') {
+        setTickets([...tickets, newTicket]);
+        setNewTicket({ id_ticket: '', id_compra: '', isbn: '', cantidad: '', precio_venta: '' });
+      } else if (selectedTable === 'Usuarios') {
+        setUsuarios([...usuarios, newUsuario]);
+        setNewUsuario({ id: '', nombre: '', apellidos: '', tipo_usuario: '', direccion: '', rfc: '' });
+      }
+  
+      // Lógica para guardar el nuevo elemento en tu API o fuente de datos
+      // (Reemplaza este comentario con tu implementación)
+      // Ejemplo:
+      // fetch('/api/clientes', {
+      //   method: 'POST',
+      //   body: JSON.stringify(newCliente),
+      //   // ...
+      // });
+  
+      setEditMode(false);
+    } else {
+      // Muestra un mensaje de error al usuario o realiza alguna otra acción
+      alert('Oops. Verifica que hayas llenado los campor correctamente :).');
+    }
   };
+  
+
+  const validateCliente = (cliente) => {
+    // Validación del nombre (solo letras y espacios)
+    if (!/^[A-Za-z\sáéíóúÁÉÍÓÚñÑ]+$/.test(cliente.nombre)) {
+      return false; 
+    }
+  
+    // Validación de los apellidos (solo letras y espacios)
+    if (!/^[A-Za-z\sáéíóúÁÉÍÓÚñÑ]+$/.test(cliente.apellidos)) {
+      return false;
+    }
+  
+    // Validación del RFC (formato específico)
+    if (!/^[A-Z]{1}[AEIOU]{1}[A-Z]{2}\d{6}[A-Z0-9]{3}$/i.test(cliente.rfc)) {
+      return false;
+    }
+  
+    return true; 
+  };
+  
+  const validateLibro = (libro) => {
+    // Validación del ISBN (13 dígitos)
+    if (!/^\d{13}$/.test(libro.isbn)) {
+      return false;
+    }
+
+  
+    // Validación de campos de texto (no más de 255 caracteres)
+    for (const campo of ['titulo', 'editorial', 'descripcion', 'ubicacion', 'genero']) {
+      if (libro[campo].length > 255) {
+        return false;
+      }
+    }
+    
+    // Validación nombre del autor// Validación del nombre (solo letras y espacios)
+    if (!/^[A-Za-z\sáéíóúÁÉÍÓÚñÑ]+$/.test(libro.autor)) {
+      return false; 
+    }
+
+    // Validación del precio y calificación (flotantes, rangos específicos)
+    if (isNaN(parseFloat(libro.precio)) || parseFloat(libro.precio) < 0) {
+      return false;
+    }
+    if (isNaN(parseFloat(libro.calificacion)) || parseFloat(libro.calificacion) < 0 || parseFloat(libro.calificacion) > 5.0) {
+      return false;
+    }
+  
+    // Validación de la portada (debe comenzar con "https://")
+    if (!libro.portada.startsWith("https://")) {
+      return false;
+    }
+  
+    // Validación de unidades disponibles (entero no negativo)
+    if (!/^\d+$/.test(libro.unidades_disponibles) || parseInt(libro.unidades_disponibles) < 0) {
+      return false;
+    }
+  
+    // Validación del género (no debe contener números)
+    if (/\d/.test(libro.genero)) {
+      return false;
+    }
+  
+    return true;
+  };
+  
+  const validateUsuario = (usuario) => {
+    // Validación del nombre y apellidos (solo letras y espacios)
+    if (!/^[A-Za-z\sáéíóúÁÉÍÓÚñÑ]+$/.test(usuario.nombre) || !/^[A-Za-z\sáéíóúÁÉÍÓÚñÑ]+$/.test(usuario.apellidos)) {
+      return false;
+    }
+  
+    // Validación del RFC (formato específico)
+    if (!/^[A-Z]{1}[AEIOU]{1}[A-Z]{2}\d{6}[A-Z0-9]{3}$/i.test(usuario.rfc)) {
+      return false;
+    }
+  
+    return true;
+  };
+  
 
   const handleEditItem = () => {
     if (selectedTable === 'Clientes') {
@@ -66,7 +173,7 @@ function CRUD() {
       setNewTicket({ id_ticket: '', id_compra: '', isbn: '', cantidad: '', precio_venta: '' });
     } else if (selectedTable === 'Usuarios') {
       setUsuarios(usuarios.map(usuario => (usuario.id === selectedItem.id ? newUsuario : usuario)));
-      setNewUsuario({ id: '', nombre: '', apellidos: '', tipo_usuario: '', descripcion: '', rfc: '' });
+      setNewUsuario({ id: '', nombre: '', apellidos: '', tipo_usuario: '', direccion: '', rfc: '' });
     }
     setEditMode(false);
     setSelectedItem(null);
