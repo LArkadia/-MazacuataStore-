@@ -136,7 +136,7 @@ CREATE TABLE `libro` (
 LOCK TABLES `libro` WRITE;
 /*!40000 ALTER TABLE `libro` DISABLE KEYS */;
 INSERT INTO `libro` VALUES 
-  ('01','Harry Potter y las tetas de fuego 2','MARCELUS WALLACE','Kanye Producciones','3rd','NULL',16.99,4.67,'https://imagessl5.casadellibro.com/a/l/s5/25/9788498386325.webp',48,NULL,NULL),
+  ('01','Harry Potter y las llantas de fuego 2','MARCELUS WALLACE','Kanye Producciones','3rd','NULL',16.99,4.67,'https://imagessl5.casadellibro.com/a/l/s5/25/9788498386325.webp',48,NULL,NULL),
   ('02','Harry, El Sucio Potter','El Bananero','Kanye Producciones','2nd','NULL',18.99,4.67,'https://imagessl0.casadellibro.com/a/l/s5/10/9788418173110.webp',48,NULL,NULL),
   ('03','El Diario de Greg','Jeff Kimmey','Molino','2nd','NULL',18.99,4.67,'https://imagessl0.casadellibro.com/a/l/s5/20/9788498672220.webp',48,NULL,NULL),
   ('04','Harry Potter y la piedra filosofal','J.K. Rowling','Salamandra','1st','NULL',15.99,4.5,'https://imagessl2.casadellibro.com/a/l/s5/62/9788498382662.webp',50,'Estante 1','Fantasía'),

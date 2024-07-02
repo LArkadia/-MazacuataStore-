@@ -18,6 +18,7 @@ export const ListingBook = (content,index=1,isHome=false) => {
       <div className="p-4">
         <h3 className="text-lg font-medium">{data.titulo}</h3>
         <p className="text-gray-600 ">Disponibles: {data.unidades_disponibles}</p>
+        <p className="text-gray-600 ">Calificación: {data.calificacion}</p>
         <p className="text-gray-600 "><i class="fa-solid fa-money-bill"></i> ${data.precio}</p>
       </div>
     </div>

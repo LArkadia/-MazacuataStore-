@@ -28,8 +28,6 @@ function CRUD() {
       setNewCliente({ ...newCliente, [name]: value });
     } else if (selectedTable === 'Libros') {
       setNewLibro({ ...newLibro, [name]: value });
-    } else if (selectedTable === 'Tickets') {
-      setNewTicket({ ...newTicket, [name]: value });
     } else if (selectedTable === 'Usuarios') {
       setNewUsuario({ ...newUsuario, [name]: value });
     }
@@ -43,8 +41,6 @@ function CRUD() {
       isValid = validateCliente(newCliente); 
     } else if (selectedTable === 'Libros') {
       isValid = validateLibro(newLibro);
-    } else if (selectedTable === 'Tickets') {
-      // No hay validaciones específicas para Tickets en este ejemplo
     } else if (selectedTable === 'Usuarios') {
       isValid = validateUsuario(newUsuario);
     }
@@ -57,9 +53,6 @@ function CRUD() {
       } else if (selectedTable === 'Libros') {
         setLibros([...libros, newLibro]);
         setNewLibro({ isbn: '', titulo: '', autor: '', editorial: '', edicion: '', descripcion: '', precio: '', calificacion: '', portada: '', unidades_disponibles: '', ubicacion: '', genero: '' });
-      } else if (selectedTable === 'Tickets') {
-        setTickets([...tickets, newTicket]);
-        setNewTicket({ id_ticket: '', id_compra: '', isbn: '', cantidad: '', precio_venta: '' });
       } else if (selectedTable === 'Usuarios') {
         setUsuarios([...usuarios, newUsuario]);
         setNewUsuario({ id: '', nombre: '', apellidos: '', tipo_usuario: '', direccion: '', rfc: '' });
@@ -77,7 +70,7 @@ function CRUD() {
       setEditMode(false);
     } else {
       // Muestra un mensaje de error al usuario o realiza alguna otra acción
-      alert('Oops. Verifica que hayas llenado los campor correctamente :).');
+      alert('Oops. Verifica que hayas llenado los campos correctamente :).');
     }
   };
   
@@ -168,9 +161,6 @@ function CRUD() {
     } else if (selectedTable === 'Libros') {
       setLibros(libros.map(libro => (libro.isbn === selectedItem.isbn ? newLibro : libro)));
       setNewLibro({ isbn: '', titulo: '', autor: '', editorial: '', edicion: '', descripcion: '', precio: '', calificacion: '', portada: '', unidades_disponibles: '', ubicacion: '', genero: '' });
-    } else if (selectedTable === 'Tickets') {
-      setTickets(tickets.map(ticket => (ticket.id_ticket === selectedItem.id_ticket ? newTicket : ticket)));
-      setNewTicket({ id_ticket: '', id_compra: '', isbn: '', cantidad: '', precio_venta: '' });
     } else if (selectedTable === 'Usuarios') {
       setUsuarios(usuarios.map(usuario => (usuario.id === selectedItem.id ? newUsuario : usuario)));
       setNewUsuario({ id: '', nombre: '', apellidos: '', tipo_usuario: '', direccion: '', rfc: '' });
@@ -184,8 +174,6 @@ function CRUD() {
       setClientes(clientes.filter(cliente => cliente.id !== id));
     } else if (selectedTable === 'Libros') {
       setLibros(libros.filter(libro => libro.isbn !== id));
-    } else if (selectedTable === 'Tickets') {
-      setTickets(tickets.filter(ticket => ticket.id_ticket !== id));
     } else if (selectedTable === 'Usuarios') {
       setUsuarios(usuarios.filter(usuario => usuario.id !== id));
     }
@@ -196,8 +184,6 @@ function CRUD() {
       setNewCliente({ id: '', nombre: '', apellidos: '', tipoUsuario: '', direccion: '', rfc: '' });
     } else if (selectedTable === 'Libros') {
       setNewLibro({ isbn: '', titulo: '', autor: '', editorial: '', edicion: '', descripcion: '', precio: '', calificacion: '', portada: '', unidades_disponibles: '', ubicacion: '', genero: '' });
-    } else if (selectedTable === 'Tickets') {
-      setNewTicket({ id_ticket: '', id_compra: '', isbn: '', cantidad: '', precio_venta: '' });
     } else if (selectedTable === 'Usuarios') {
       setNewUsuario({ id: '', nombre: '', apellidos: '', tipo_usuario: '', descripcion: '', rfc: '' });
     }
@@ -229,7 +215,7 @@ function CRUD() {
         <h1 className="text-2xl font-semibold mb-4">Administrar {selectedTable}</h1>
 
         {/* Formulario para crear o editar item */}
-        {(selectedTable === 'Clientes' || selectedTable === 'Libros' || selectedTable === 'Tickets' || selectedTable === 'Usuarios') && (
+        {(selectedTable === 'Clientes' || selectedTable === 'Libros' || selectedTable === 'Usuarios') && (
           <div className="bg-white p-4 rounded-md shadow-md mb-4">
             <h2 className="text-lg font-semibold mb-2">{editMode ? `Editar ${selectedTable.slice(0, -1)}` : `Crear ${selectedTable.slice(0, -1)}`}</h2>
             {/* Campos del formulario */}
@@ -273,13 +259,6 @@ function CRUD() {
                 </div>
               </>
             )}
-            {selectedTable === 'Tickets' && (
-              <>
-                <input type="text" name="isbn" placeholder="ISBN" value={newTicket.isbn} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
-                <input type="text" name="cantidad" placeholder="Cantidad" value={newTicket.cantidad} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
-                <input type="text" name="precio_venta" placeholder="Precio de Venta" value={newTicket.precio_venta} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
-              </>
-            )}
             {selectedTable === 'Usuarios' && (
               <>
                 <input type="text" name="nombre" placeholder="Nombre" value={newUsuario.nombre} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
@@ -294,7 +273,7 @@ function CRUD() {
                   <option value="admni">Admin</option>
                   <option value="vendedor">Vendedor</option>
                 </select>
-                <input type="text" name="descripcion" placeholder="Descripción" value={newUsuario.descripcion} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
+                <input type="text" name="direccion" placeholder="Dirección" value={newUsuario.direccion} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
                 <input type="text" name="rfc" placeholder="RFC" value={newUsuario.rfc} onChange={handleInputChange} className="w-full p-2 border rounded-md mb-2 focus:outline-none focus:ring focus:border-blue-300" />
               </>
             )}
