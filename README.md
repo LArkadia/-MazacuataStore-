@@ -2,18 +2,15 @@
 Este proyecto es una librería online desarrollada utilizando el framework CSS Tailwind CSS. Ofrece una interfaz de usuario intuitiva y moderna para la búsqueda, visualización y compra de libros.
 
 ### Tecnologías utilizadas
-* **Frontend:**
-    * **Framework:** Tailwind CSS
-    * **Lenguaje:** JavaScript 
-* **Backend:**
-    * **Framework:** (Especifica el framework backend utilizado, si aplica)
-    * **Lenguaje:** (Especifica el lenguaje de programación backend)
-    * **Base de datos:** (Especifica el sistema de gestión de bases de datos utilizado)
+* Tailwind CSS
+* JavaScript 
+* NodeJS
+* MySQL
 
 ### Instalación
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/
+   git clone https://github.com/LArkadia/-MazacuataStore-
    ```
 2. **Instalar dependencias:**
    ```bash
