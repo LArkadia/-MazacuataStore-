@@ -1,12 +1,38 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import SaleBook from '../components/ui/SaleBook';
+import CartPOSItem from '../components/ui/CartPOSItem';
 
 function PointOfSale() {
   const [cartItems, setCartItems] = useState([]); // Estado para los libros en el carrito
   const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
+  const [searchResults, setSearchResults] = useState([]); // Estado para los resultados de búsqueda
+  const [loading, setLoading] = useState(false); // Estado para mostrar el cargando
+  const [error, setError] = useState(null); // Estado para manejar errores
 
   // Función para manejar la búsqueda
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     setSearchTerm(event.target.value);
+    if (event.target.value.length > 2) {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await axios.get(`http://localhost:4000/api/books/single/${event.target.value}`);
+        if (Array.isArray(response.data.body)) {
+          setSearchResults(response.data.body);
+        } else {
+          setSearchResults([]); // Asegúrate de que sea un array
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError('Error fetching data');
+        setSearchResults([]);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      setSearchResults([]);
+    }
   };
 
   // Función para agregar un libro al carrito
@@ -14,7 +40,10 @@ function PointOfSale() {
     setCartItems([...cartItems, book]);
   };
 
-  // ... (otras funciones para modificar cantidad, eliminar del carrito, etc.)
+  // Función para calcular el total del carrito
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => total + item.precio, 0).toFixed(2);
+  };
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -29,13 +58,19 @@ function PointOfSale() {
           onChange={handleSearch}
         />
 
+        {/* Mostrar estado de carga o errores */}
+        {loading && <p>Cargando...</p>}
+        {error && <p className="text-red-500">{error}</p>}
+
         {/* Resultados de la búsqueda (libros) */}
         <div className="grid grid-cols-3 gap-4 mt-4">
-          {/* Aqui se mapearan los resultados de la búsqueda y muestra cada libro */}
-          {[...Array(10)].map((_, index) => ( 
-            <div key={index} className="bg-gray-200 rounded-md p-4 shadow-md">
-              <p className="text-center">Título del libro</p>
-              <button onClick={() => addToCart({ title: 'Título del libro', price: 200 })}>
+          {searchResults.map((book, index) => (
+            <div key={index}>
+              <SaleBook data={book} />
+              <button
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md mt-4"
+                onClick={() => addToCart(book)}
+              >
                 Agregar al carrito
               </button>
             </div>
@@ -49,22 +84,11 @@ function PointOfSale() {
 
         {/* Artículos en el carrito */}
         {cartItems.map((item, index) => (
-          <div key={index} className="flex justify-between items-center mb-4">
-            <div>
-              <p>{item.title}</p>
-              <p className="text-gray-600">ISBN: {/* Mostrar ISBN */}</p>
-            </div>
-            <div className="flex items-center">
-              <button className="px-2 py-1 bg-blue-500 text-white rounded-md">-</button>
-              <span className="mx-2">{item.quantity || 1}</span>
-              <button className="px-2 py-1 bg-blue-500 text-white rounded-md">+</button>
-              <p className="ml-4">${item.price.toFixed(2)}</p>
-            </div>
-          </div>
+          <CartPOSItem key={index} item={item} />
         ))}
 
         <div className="mt-8">
-          <p className="text-lg font-semibold">Total: ${cartItems.reduce((total, item) => total + item.price, 0).toFixed(2)}</p>
+          <p className="text-lg font-semibold">Total: ${calculateTotal()}</p>
           <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md mt-4">
             Cobro
           </button>

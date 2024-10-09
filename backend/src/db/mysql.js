@@ -213,24 +213,38 @@ function deleteClient(table, data) {
   });
 }
 
-/* VENTAS */
-
+/* Sales & selling */
 function pointOfSale(table, data) {
-    
-        return new Promise((resolve, reject)=>{
-            const query = `INSERT INTO ${table} SET ? ON DUPLICATE KEY UPDATE ?`
-            console.log('executing query', query, 'with data: ', data);
-            connection.query(query, [data, data], (error, result)=>{
-                if (error) {
-                    console.error('Error executing query');
-                    return reject(error);
+    return new Promise((resolve, reject) => {
+        const query = `INSERT INTO ${table} SET ?`;
+        connection.query(query, data.venta, (error, result) => {
+            if (error) {
+                console.error('Error executing venta query', error);
+                return reject(error);
+            }
+
+            const idVenta = result.insertId;
+            const detalles = data.detalles.map(detalle => ({
+                id_venta: idVenta,
+                ...detalle
+            }));
+
+            const detalleQuery = `INSERT INTO detalle_venta (id_venta, isbn, total) VALUES ?`;
+            const detalleValues = detalles.map(detalle => [detalle.id_venta, detalle.isbn, detalle.total]);
+
+            connection.query(detalleQuery, [detalleValues], (detalleError, detalleResult) => {
+                if (detalleError) {
+                    console.error('Error executing detalle_venta query', detalleError);
+                    return reject(detalleError);
                 }
-                console.log('Query executed succesfully: ', result);
-                resolve(result);
+                resolve(detalleResult);
             });
         });
-    
+    });
 }
+
+
+
 
 function getSells(table) {
     return new Promise((resolve, reject)=>{

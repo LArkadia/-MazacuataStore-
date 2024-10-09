@@ -19,11 +19,21 @@ async function getAllSells(req, res) {
 
 async function pointOfSale(req, res, next) {
     try {
-        const items = await sellController.pointOfSale(req.body);
+        const body = {
+            venta: {
+                id_usuario: req.body.id_usuario,
+                created_at: new Date(),
+                updated_at: new Date()
+            },
+            detalles: req.body.detalles // Suponiendo que `detalles` es un array de objetos con `isbn` y `total`
+        };
+
+        const result = await sellController.pointOfSale(body);
         answer.success(req, res, 'Sold!', 201);
     } catch (err) {
         next(err);
     }
 }
+
 
 module.exports  =   router;
