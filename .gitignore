@@ -15,3 +15,4 @@ venv
 #Doc for configuration DB
 .env
 backend/.env
+backend/.env

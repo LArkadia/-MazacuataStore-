@@ -8,9 +8,45 @@ function Payment() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí iría la lógica para procesar el pago, verificar que el numero de tarjeta sean 16 digitos, no haya expirado, cvv de 3 digitos
-    console.log('Procesando pago con:', { cardNumber, expiryDate, cardholderName, cvv });
+
+    // Validación de los campos
+    if (!validateCardNumber(cardNumber)) {
+      alert('El número de tarjeta debe tener 16 dígitos.');
+      return;
+    }
+
+    if (!validateExpiryDate(expiryDate)) {
+      alert('La fecha de expiración debe ser posterior a 07/24.');
+      return;
+    }
+
+    if (!validateCvv(cvv)) {
+      alert('El CVV debe tener 3 dígitos.');
+      return;
+    }
+
+    if (!validateCardholderName(cardholderName)) {
+      alert('El nombre del titular debe contener solo letras, espacios');
+      return;
+    }
+
+    // Si todas las validaciones pasan, se procede con el procesamiento del pago
+    alert('Se procede con el pago');
+
+    // ... (lógica para enviar los datos del pago a backend)
   };
+
+  // Funciones de validación
+  const validateCardNumber = (number) => /^\d{16}$/.test(number);
+  const validateExpiryDate = (date) => {
+    const [month, year] = date.split('/');
+    const expiryDate = new Date(`20${year}`, month - 1, 1); // Mes es 0-indexado
+    const currentDate = new Date();
+    return expiryDate > currentDate;
+  };
+  const validateCvv = (cvv) => /^\d{3}$/.test(cvv);
+  const validateCardholderName = (name) => /^[A-Za-z\sáéíóúÁÉÍÓÚñÑ]+$/.test(name);
+
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">

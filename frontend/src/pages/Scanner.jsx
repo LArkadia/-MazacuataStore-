@@ -3,9 +3,18 @@ import bookImage from '../assets/IMG/mazacuataBoss.png';
 
 function Scanner() {
   const [isbn, setIsbn] = useState('');
+  const [error, setError] = useState('');
 
   const handleSearch = () => {
-    console.log(`Buscando precio para ISBN: ${isbn}`);
+    setError(''); // Limpiar el mensaje de error al intentar buscar
+    if (/^\d{13}$/.test(isbn)) {
+      // ISBN válido (13 dígitos)
+      alert(`Buscando precio para ISBN: ${isbn}`);
+      console.log(`Buscando precio para ISBN: ${isbn}`);
+      // ... (tu lógica para buscar el precio)
+    } else {
+      setError('El ISBN debe tener 13 dígitos.'); 
+    }
   };
 
   return (
@@ -23,20 +32,27 @@ function Scanner() {
         </h1>
         <p className="text-lg mb-6 text-gray-600">Ingresa su ISBN</p>
 
-        <div className="flex items-center rounded-md shadow-md">
-          <input
-            type="text"
-            placeholder="ISBN"
-            className="py-2 px-4 rounded-l-md focus:outline-none focus:ring focus:border-blue-300"
-            value={isbn}
-            onChange={(e) => setIsbn(e.target.value)}
-          />
-          <button
-            onClick={handleSearch}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-md"
-          >
-            Buscar
-          </button>
+        <div className="flex flex-col items-center"> {/* Contenedor del formulario y error */}
+          <div className="flex items-center rounded-md shadow-md mb-2">
+            <input
+              type="text"
+              placeholder="ISBN"
+              className={`py-2 px-4 rounded-l-md focus:outline-none focus:ring focus:border-blue-300 ${
+                error ? 'border-red-500' : '' // Agrega borde rojo si hay error
+              }`}
+              value={isbn}
+              onChange={(e) => setIsbn(e.target.value)}
+            />
+            <button
+              onClick={handleSearch}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-md"
+            >
+              Buscar
+            </button>
+          </div>
+          {error && ( // Mostrar mensaje de error si existe
+            <p className="text-red-500 text-sm mt-1">{error}</p>
+          )}
         </div>
       </div>
     </div>
